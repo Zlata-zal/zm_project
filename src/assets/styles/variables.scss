@@ -1,0 +1,17 @@
+@use "sass:color";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Serif+Text:ital@0;1&family=Dancing+Script:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+
+
+$accent: #201a34;
+$white: #fff;
+$black:#473D53;
+$grey-light: #6a6969;
+$white-blue: #050509;
+$white-yellow:  #9d7961; 
+$dark-purple: color.adjust($accent, $lightness: -30%);
+$hard-dark-accent: darken($accent, 30%);
+$purple: color.adjust($accent, $lightness: -10%);
+$bx-accent: 0 4px 4px rgba($accent, 0.25);
+$bx-16: 0 3px 6px rgba(0, 0, 0, 0.16);
+$default-font: "Montserrat", sans-serif;;

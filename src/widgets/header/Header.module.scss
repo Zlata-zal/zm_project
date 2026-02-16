@@ -1,0 +1,96 @@
+.appHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(14px);
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.9),
+    rgba(15, 23, 42, 0.65),
+    transparent
+  );
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.6);
+  background: radial-gradient(circle at 20% 0%, #4f46e5, #1e1b4b);
+  box-shadow:
+    0 0 18px rgba(79, 70, 229, 0.6),
+    0 0 45px rgba(56, 189, 248, 0.45);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navButton {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: transparent;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease;
+
+  &:hover {
+    background-color: rgba(148, 163, 184, 0.16);
+    border-color: rgba(148, 163, 184, 0.35);
+    transform: translateY(-1px);
+  }
+}
+
+.navPrimary {
+  background: linear-gradient(135deg, #4f46e5, #6366f1, #06b6d4);
+  color: #f9fafb;
+  box-shadow:
+    0 10px 25px rgba(99, 102, 241, 0.35),
+    0 0 0 1px rgba(129, 140, 248, 0.4);
+
+  &:hover {
+    background: linear-gradient(135deg, #4338ca, #4f46e5, #0891b2);
+    border-color: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  .appHeader {
+    padding: 0.9rem 1rem;
+  }
+
+  .headerNav {
+    gap: 0.4rem;
+  }
+
+  .navButton {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
