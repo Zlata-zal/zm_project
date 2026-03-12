@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import styles from './AuthModal.module.scss'
 
+export interface BodyParams {
+  heightCm?: number
+  shouldersCm?: number
+  waistCm?: number
+  hipsCm?: number
+  shape?: string
+}
+
 export interface AuthUser {
   name?: string
   email: string
+  body?: BodyParams
 }
 
 interface AuthModalProps {

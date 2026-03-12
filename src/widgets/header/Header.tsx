@@ -4,7 +4,7 @@ import styles from './Header.module.scss'
 
 interface HeaderProps {
   user: AuthUser | null
-  onNavigate: (to: 'home' | 'test' | 'account') => void
+  onNavigate: (to: 'home' | 'test' | 'account' | 'wardrobe') => void
   onAuthSuccess: (payload: { user: AuthUser; mode: 'login' | 'register' }) => void
 }
 

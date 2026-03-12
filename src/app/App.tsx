@@ -3,13 +3,14 @@ import Layout from '../widgets/Layout'
 import styles from './App.module.scss'
 import TestPage from '../pages/test/TestPage'
 import AccountPage from '../pages/account/AccountPage'
-import { type AuthUser } from '../widgets/auth/AuthModal'
+import WardrobePage from '../pages/wardrobe/WardrobePage'
+import { type AuthUser, type BodyParams } from '../widgets/auth/AuthModal'
 
 const App: React.FC = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
   const [isTestOpen, setIsTestOpen] = useState(false)
-  const [activeView, setActiveView] = useState<'home' | 'test' | 'account'>('home')
+  const [activeView, setActiveView] = useState<'home' | 'test' | 'account' | 'wardrobe'>('home')
   const [user, setUser] = useState<AuthUser | null>(null)
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const App: React.FC = () => {
     }
   }
 
-  const navigate = (to: 'home' | 'test' | 'account') => {
+  const navigate = (to: 'home' | 'test' | 'account' | 'wardrobe') => {
     setActiveView(to)
     setIsTestOpen(to === 'test')
   }
@@ -106,6 +107,18 @@ const App: React.FC = () => {
             setIsTestOpen(false)
             setActiveView('home')
           }}
+          onBodySubmit={(body: BodyParams) => {
+            if (!user) return
+            const updated: AuthUser = { ...user, body }
+            setUser(updated)
+            try {
+              localStorage.setItem('zm_user', JSON.stringify(updated))
+            } catch {
+              // ignore
+            }
+            setActiveView('account')
+            setIsTestOpen(false)
+          }}
         />
       </Layout>
     )
@@ -126,14 +139,45 @@ const App: React.FC = () => {
               }
               setActiveView('home')
             }}
+            onOpenWardrobe={() => setActiveView('wardrobe')}
+            onRefine={() => {
+              setActiveView('test')
+              setIsTestOpen(true)
+            }}
           />
         ) : (
           <TestPage
             onBack={() => {
               setActiveView('home')
             }}
+            onBodySubmit={(body: BodyParams) => {
+              if (!user) return
+              const updated: AuthUser = { ...user, body }
+              setUser(updated)
+              try {
+                localStorage.setItem('zm_user', JSON.stringify(updated))
+              } catch {
+                // ignore
+              }
+              setActiveView('account')
+            }}
           />
         )}
+      </Layout>
+    )
+  }
+
+  if (activeView === 'wardrobe') {
+    return (
+      <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
+        <WardrobePage
+          user={user}
+          onBack={() => setActiveView('account')}
+          onMoreQuestions={() => {
+            setActiveView('test')
+            setIsTestOpen(true)
+          }}
+        />
       </Layout>
     )
   }
