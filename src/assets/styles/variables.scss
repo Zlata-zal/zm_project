@@ -3,12 +3,40 @@
 
 
 
-$accent: #201a34;
+$accent: #5c1e1f;
 $white: #fff;
-$black:#473D53;
-$grey-light: #6a6969;
-$white-blue: #050509;
-$white-yellow:  #9d7961; 
+$black:#383d41;
+$grey-light: #8e979e;
+$white-blue: #f7f4e9;
+$white-yellow:  #efead4; 
+
+// Main page color palette
+// Primary colors (base): #F7F4E9 and #8E979E
+$color-bg-base: #f7f4e9;
+$color-bg-deep: #dfe3e5;
+$color-bg-panel: #f7f4e9;
+
+$color-primary: #5c1e1f;
+$color-primary-hover: #361112;
+$color-primary-soft: #963132;
+
+$color-secondary: #8e979e;
+$color-secondary-hover: #383d41;
+$color-secondary-soft: #8e979e;
+$color-gray-100: #f7f4e9;
+$color-gray-200: #e7eaec;
+$color-gray-300: #c4cacf;
+$color-gray-400: #8e979e;
+$color-gray-500: #677178;
+$color-gray-700: #383d41;
+
+$color-text-primary: #383d41;
+$color-text-secondary: #8e979e;
+$color-link: #963132;
+
+$color-surface-light-start: #f7f4e9;
+$color-surface-light-mid: #efead4;
+$color-surface-light-end: #eee2ac;
 $dark-purple: color.adjust($accent, $lightness: -30%);
 $hard-dark-accent: darken($accent, 30%);
 $purple: color.adjust($accent, $lightness: -10%);

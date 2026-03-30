@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables' as *;
+
 .testPage {
   max-width: 960px;
   width: 100%;
@@ -19,7 +21,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.9);
+  color: rgba($color-text-secondary, 0.9);
   margin-bottom: 0.5rem;
 }
 
@@ -32,17 +34,17 @@
   margin: 0;
   font-size: 0.98rem;
   max-width: 30rem;
-  color: rgba(209, 213, 219, 0.9);
+  color: rgba($color-text-secondary, 0.9);
 }
 
 .backButton {
   align-self: flex-start;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
+  border: 1px solid rgba($color-secondary-soft, 0.5);
   padding: 0.4rem 1rem;
   font-size: 0.85rem;
-  background: rgba(15, 23, 42, 0.6);
-  color: rgba(226, 232, 240, 0.96);
+  background: rgba($color-bg-deep, 0.6);
+  color: rgba($color-text-primary, 0.96);
   cursor: pointer;
   transition:
     background-color 0.18s ease,
@@ -50,8 +52,8 @@
     transform 0.12s ease;
 
   &:hover {
-    background: rgba(30, 64, 175, 0.7);
-    border-color: rgba(129, 140, 248, 0.8);
+    background: rgba($color-primary, 0.7);
+    border-color: rgba($color-primary-soft, 0.8);
     transform: translateY(-1px);
   }
 }
@@ -78,22 +80,22 @@
 
 .bodyLabel {
   font-size: 0.85rem;
-  color: rgba(148, 163, 184, 0.95);
+  color: rgba($color-text-secondary, 0.95);
 }
 
 .bodyInput,
 .bodySelect {
   padding: 0.55rem 0.75rem;
   border-radius: 0.6rem;
-  border: 1px solid rgba(148, 163, 184, 0.45);
-  background: rgba(15, 23, 42, 0.7);
-  color: rgba(226, 232, 240, 0.98);
+  border: 1px solid rgba($color-secondary-soft, 0.45);
+  background: rgba($color-bg-deep, 0.7);
+  color: rgba($color-text-primary, 0.98);
   font-size: 0.9rem;
   font-family: inherit;
 }
 
 .bodyInput::placeholder {
-  color: rgba(148, 163, 184, 0.6);
+  color: rgba($color-text-secondary, 0.6);
 }
 
 .saveButtonRow {
@@ -108,8 +110,8 @@
   padding: 0.55rem 1.4rem;
   font-size: 0.9rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #4f46e5, #6366f1, #06b6d4);
-  color: #f9fafb;
+  background: linear-gradient(135deg, $color-primary, $color-primary-soft, $color-secondary);
+  color: $color-surface-light-start;
   cursor: pointer;
 }
 
@@ -117,9 +119,9 @@
   position: relative;
   border-radius: 1.25rem;
   padding: 1.1rem 1.2rem 1.25rem;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), #020617);
-  color: rgba(226, 232, 240, 0.98);
+  border: 1px solid rgba($color-secondary-soft, 0.35);
+  background: radial-gradient(circle at top left, rgba($color-bg-deep, 0.96), $color-bg-base);
+  color: rgba($color-text-primary, 0.98);
   text-align: left;
   cursor: pointer;
   overflow: hidden;
@@ -127,8 +129,8 @@
   align-items: center;
   gap: 0.8rem;
   box-shadow:
-    0 18px 45px rgba(15, 23, 42, 0.9),
-    0 0 0 1px rgba(15, 23, 42, 0.8);
+    0 18px 45px rgba($color-bg-deep, 0.9),
+    0 0 0 1px rgba($color-bg-deep, 0.8);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -137,19 +139,19 @@
 
   &:hover {
     transform: translateY(-6px);
-    border-color: rgba(191, 219, 254, 0.8);
+    border-color: rgba($color-surface-light-end, 0.8);
     box-shadow:
-      0 28px 70px rgba(15, 23, 42, 1),
-      0 0 0 1px rgba(148, 163, 184, 0.7);
+      0 28px 70px rgba($color-bg-deep, 1),
+      0 0 0 1px rgba($color-secondary-soft, 0.7);
   }
 }
 
 .optionSelected {
-  border-color: rgba(94, 234, 212, 0.95);
-  background: radial-gradient(circle at top left, rgba(45, 212, 191, 0.24), #020617);
+  border-color: rgba($color-primary-soft, 0.95);
+  background: radial-gradient(circle at top left, rgba($color-primary, 0.24), $color-bg-base);
   box-shadow:
-    0 26px 70px rgba(34, 197, 235, 0.4),
-    0 0 0 1px rgba(34, 211, 238, 0.7);
+    0 26px 70px rgba($color-secondary, 0.4),
+    0 0 0 1px rgba($color-secondary-soft, 0.7);
 }
 
 .bubbleIndex {
@@ -161,10 +163,10 @@
   justify-content: center;
   font-size: 0.85rem;
   font-weight: 600;
-  background: radial-gradient(circle at 20% 0%, #4f46e5, #0ea5e9);
+  background: radial-gradient(circle at 20% 0%, $color-primary, $color-secondary-soft);
   box-shadow:
-    0 0 15px rgba(56, 189, 248, 0.8),
-    0 0 35px rgba(79, 70, 229, 0.6);
+    0 0 15px rgba($color-secondary-soft, 0.8),
+    0 0 35px rgba($color-primary, 0.6);
 }
 
 .optionText {

@@ -1,9 +1,11 @@
+@use '../assets/styles/variables' as *;
+
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at top left, #1b1f3b, #050816 55%, #02010a);
-  color: #f9fafb;
+  background: radial-gradient(circle at top left, $color-bg-panel, $color-bg-deep 55%, $color-bg-base);
+  color: $color-text-primary;
 }
 
 .appMain {

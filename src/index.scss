@@ -1,6 +1,7 @@
+@use './assets/styles/variables' as *;
+
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
-    system-ui, sans-serif;
+  font-family: 'Zerno';
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -19,7 +20,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #020617;
+  background-color: $color-bg-base;
 }
 
 #root {

@@ -1,6 +1,13 @@
+@use '../assets/styles/variables' as *;
+
+.homeRoot {
+  width: 100%;
+  max-width: 1120px;
+  position: relative;
+}
+
 /* Hero section */
 .hero {
-  max-width: 1120px;
   width: 100%;
   min-height: 72vh;
   display: flex;
@@ -10,13 +17,14 @@
 .heroContent {
   text-align: left;
   max-width: 640px;
+  transform: translateY(-24px);
 }
 
 .heroEyebrow {
   font-size: 0.8rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.9);
+  color: rgba($color-gray-500, 0.92);
   margin-bottom: 0.85rem;
 }
 
@@ -24,16 +32,29 @@
   font-size: clamp(2.6rem, 5vw, 3.6rem);
   line-height: 1.05;
   margin: 0 0 1rem;
-  background: linear-gradient(135deg, #e5e7eb, #c7d2fe, #a5f3fc);
+  background: linear-gradient(
+    135deg,
+    $grey-light,
+    $color-surface-light-mid,
+    $accent
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+.mainLogo {
+  font-size: 10.8rem;
+  font-weight: 700;
+  color: $color-primary;
+  margin: -1.15rem 0 -0.55rem;
+  line-height: 0.9;
+  text-shadow: 0 10px 35px rgba($color-gray-700, 0.22);
 }
 
 .heroSubtitle {
   font-size: 1rem;
   max-width: 32rem;
-  color: rgba(209, 213, 219, 0.92);
+  color: rgba($color-gray-500, 0.95);
   margin-bottom: 1.75rem;
 }
 
@@ -60,36 +81,35 @@
 }
 
 .btnPrimary {
-  background: linear-gradient(135deg, #4f46e5, #6366f1, #06b6d4);
-  color: #f9fafb;
+  background: linear-gradient(135deg, $color-primary, $color-primary-soft, $color-secondary);
+  color: $color-surface-light-start;
   box-shadow:
-    0 18px 45px rgba(79, 70, 229, 0.55),
-    0 0 0 1px rgba(191, 219, 254, 0.25);
+    0 18px 45px rgba($color-primary, 0.45),
+    0 0 0 1px rgba($color-surface-light-end, 0.35);
 
   &:hover {
-    background: linear-gradient(135deg, #4338ca, #4f46e5, #0891b2);
+    background: linear-gradient(135deg, $color-primary-hover, $color-primary, $color-secondary-hover);
     transform: translateY(-1px);
     box-shadow:
-      0 22px 55px rgba(79, 70, 229, 0.7),
-      0 0 0 1px rgba(191, 219, 254, 0.32);
+      0 22px 55px rgba($color-primary, 0.55),
+      0 0 0 1px rgba($color-surface-light-end, 0.45);
   }
 }
 
 .btnSecondary {
-  background-color: rgba(15, 23, 42, 0.85);
-  color: #e5e7eb;
-  border-color: rgba(148, 163, 184, 0.6);
+  background-color: rgba($color-gray-300, 0.45);
+  color: $color-gray-700;
+  border-color: rgba($color-gray-400, 0.55);
 
   &:hover {
-    background-color: rgba(15, 23, 42, 1);
-    border-color: rgba(191, 219, 254, 0.7);
+    background-color: rgba($color-gray-300, 0.7);
+    border-color: rgba($color-gray-500, 0.72);
     transform: translateY(-1px);
   }
 }
 
 /* Styles section */
 .stylesSection {
-  max-width: 1120px;
   width: 100%;
   margin-top: 4rem;
 }
@@ -103,7 +123,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.9);
+  color: rgba($color-gray-500, 0.9);
   margin-bottom: 0.5rem;
 }
 
@@ -114,8 +134,47 @@
 
 .stylesSubtitle {
   font-size: 0.98rem;
-  color: rgba(209, 213, 219, 0.9);
+  color: rgba($color-gray-500, 0.9);
   max-width: 32rem;
+}
+
+.scrollLineWrap {
+  position: absolute;
+  top: -120px;
+  right: min(2vw, 16px);
+  width: 40vw;
+  height: calc(100% + 280px);
+  pointer-events: none;
+  opacity: 0.95;
+  z-index: 0;
+}
+
+.scrollLine {
+  width: 100%;
+  height: 100%;
+}
+
+.scrollLineTrack {
+  fill: none;
+  stroke: rgba($color-gray-300, 0.38);
+  stroke-width: 2;
+}
+
+.scrollLineStroke {
+  fill: none;
+  stroke: rgba($color-primary-soft, 0.8);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-dasharray: 1650;
+  stroke-dashoffset: 1650;
+  filter: drop-shadow(0 0 10px rgba($color-primary, 0.34));
+  transition: stroke-dashoffset 0.08s linear;
+}
+
+.hero,
+.stylesSection {
+  position: relative;
+  z-index: 1;
 }
 
 .stylesGrid {
@@ -130,11 +189,11 @@
   max-width: 520px;
   padding: 1.3rem 1.6rem 1.45rem;
   border-radius: 1.2rem;
-  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), #020617);
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: radial-gradient(circle at top left, rgba($color-bg-deep, 0.96), $color-bg-base);
+  border: 1px solid rgba($color-gray-400, 0.42);
   box-shadow:
-    0 22px 60px rgba(15, 23, 42, 0.9),
-    0 0 0 1px rgba(15, 23, 42, 0.8);
+    0 22px 60px rgba($color-gray-400, 0.23),
+    0 0 0 1px rgba($color-gray-300, 0.65);
   opacity: 0;
   transform: translateX(0);
   transition:
@@ -165,24 +224,41 @@
   font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  border: 1px solid rgba(129, 140, 248, 0.7);
-  color: rgba(191, 219, 254, 0.95);
-  background: radial-gradient(circle at 0 0, rgba(79, 70, 229, 0.35), transparent);
+  border: 1px solid rgba($color-primary-soft, 0.7);
+  color: rgba($color-surface-light-start, 0.95);
+  background: radial-gradient(circle at 0 0, rgba($color-primary, 0.35), transparent);
 }
 
 .styleTitle {
   margin: 0.65rem 0 0.4rem;
   font-size: 1.2rem;
 }
+.styleImage {
+  width: 30%;
+  height: 35%;
+  object-fit: cover;   
+  border-radius: 8px;
+}
 
 .styleDescription {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(209, 213, 219, 0.9);
+  color: rgba($color-gray-500, 0.92);
 }
 
 @media (max-width: 768px) {
   .heroContent {
     text-align: left;
+    transform: translateY(-12px);
+  }
+
+  .mainLogo {
+    font-size: 7.6rem;
+  }
+
+  .scrollLineWrap {
+    width: 156px;
+    right: -8px;
+    opacity: 0.5;
   }
 }
