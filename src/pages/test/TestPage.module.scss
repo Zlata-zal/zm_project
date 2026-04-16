@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  margin-left: auto;
+  //margin-left: auto;
 }
 
 .headerRow {
@@ -118,7 +118,7 @@
 .optionCard {
   position: relative;
   border-radius: 1.25rem;
-  padding: 1.1rem 1.2rem 1.25rem;
+  padding: 1.0rem 1.0rem 1.25rem;
   border: 1px solid rgba($color-secondary-soft, 0.35);
   background: radial-gradient(circle at top left, rgba($color-bg-deep, 0.96), $color-bg-base);
   color: rgba($color-text-primary, 0.98);

@@ -35,7 +35,6 @@
   background: linear-gradient(
     135deg,
     $grey-light,
-    $color-surface-light-mid,
     $accent
   );
   -webkit-background-clip: text;
@@ -43,7 +42,7 @@
   color: transparent;
 }
 .mainLogo {
-  font-size: 10.8rem;
+  font-size: 18.8rem;
   font-weight: 700;
   color: $color-primary;
   margin: -1.15rem 0 -0.55rem;
@@ -89,7 +88,7 @@
 
   &:hover {
     background: linear-gradient(135deg, $color-primary-hover, $color-primary, $color-secondary-hover);
-    transform: translateY(-1px);
+    //transform: translateY(-1px);
     box-shadow:
       0 22px 55px rgba($color-primary, 0.55),
       0 0 0 1px rgba($color-surface-light-end, 0.45);
@@ -120,15 +119,15 @@
 }
 
 .stylesEyebrow {
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
+  font-size: 0.88rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: rgba($color-gray-500, 0.9);
   margin-bottom: 0.5rem;
 }
 
 .stylesTitle {
-  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-size: clamp(2.8rem, 3vw, 2.2rem);
   margin: 0 0 0.75rem;
 }
 
@@ -156,18 +155,18 @@
 
 .scrollLineTrack {
   fill: none;
-  stroke: rgba($color-gray-300, 0.38);
+  stroke: rgba($color-gray-200, 0.38);
   stroke-width: 2;
 }
 
 .scrollLineStroke {
   fill: none;
   stroke: rgba($color-primary-soft, 0.8);
-  stroke-width: 2.8;
+  stroke-width: 4.5;
   stroke-linecap: round;
-  stroke-dasharray: 1650;
-  stroke-dashoffset: 1650;
-  filter: drop-shadow(0 0 10px rgba($color-primary, 0.34));
+  stroke-dasharray: 1750;
+  stroke-dashoffset: 1750;
+  filter: drop-shadow(0 0 10px rgba($dark-purple, 0.44));
   transition: stroke-dashoffset 0.08s linear;
 }
 
@@ -261,4 +260,28 @@
     right: -8px;
     opacity: 0.5;
   }
+}
+.carousel {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+  margin: 100px 100px;
+}
+.itemImageCarousel {
+  position: absolute;
+  width: 170px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+.carouselButton {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) translateX(60px);
+  z-index: 20;
 }
