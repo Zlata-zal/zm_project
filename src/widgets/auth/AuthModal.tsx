@@ -1,146 +1,124 @@
 import React, { useState } from 'react'
 import styles from './AuthModal.module.scss'
 
-export interface BodyParams {
-  heightCm?: number
-  shouldersCm?: number
-  waistCm?: number
-  hipsCm?: number
-  shape?: string
+export interface AuthUser {
+  email: string
+  name?: string
+  body?: BodyParams
 }
 
-export interface AuthUser {
-  name?: string
-  email: string
-  body?: BodyParams
+export interface BodyParams {
+  // твои поля
 }
 
 interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
-  onAuthSuccess: (payload: { user: AuthUser; mode: 'login' | 'register' }) => void
+  onSuccess: (data: { user: AuthUser; mode: 'login' | 'register' }) => void
 }
 
-const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onAuthSuccess }) => {
-  const [isLogin, setIsLogin] = useState(true)
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: '',
-  })
+const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess }) => {
+  const [mode, setMode] = useState<'login' | 'register'>('login')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
 
   if (!isOpen) return null
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
-    const user: AuthUser = {
-      email: formData.email.trim(),
-      name: formData.name.trim() || undefined,
-    }
-
-    onAuthSuccess({ user, mode: isLogin ? 'login' : 'register' })
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    onSuccess({
+      user: { email, name },
+      mode,
     })
+    onClose();
   }
 
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}>
-          ×
+          <svg viewBox="0 0 24 24">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
         </button>
 
         <div className={styles.header}>
-          <h2 className={styles.title}>{isLogin ? 'Log in' : 'Sign up'}</h2>
-          <p className={styles.subtitle}>
-            {isLogin
-              ? 'Welcome back! Please enter your details.'
-              : 'Create an account to get started.'}
-          </p>
+          <h2 className={styles.logo}>ZM</h2>
+          <p className={styles.logoMeta}>— style code · 2026 —</p>
+        </div>
+
+        <div className={styles.tabs}>
+          <span
+            className={`${styles.tabIndicator} ${
+              mode === 'register' ? styles.tabIndicatorRight : ''
+            }`}
+          />
+          <span
+            className={`${styles.tab} ${mode === 'login' ? styles.tabActive : ''}`}
+            onClick={() => setMode('login')}
+          >
+            войти
+          </span>
+          <span
+            className={`${styles.tab} ${mode === 'register' ? styles.tabActive : ''}`}
+            onClick={() => setMode('register')}
+          >
+            регистрация
+          </span>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          {!isLogin && (
+          {mode === 'register' && (
             <div className={styles.field}>
-              <label htmlFor="name" className={styles.label}>
-                Name
-              </label>
+              <span className={styles.label}>— имя —</span>
               <input
-                type="text"
-                id="name"
-                name="name"
                 className={styles.input}
-                placeholder="Enter your name"
-                value={formData.name}
-                onChange={handleChange}
-                required={!isLogin}
+                type="text"
+                placeholder="как тебя зовут"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
               />
             </div>
           )}
 
           <div className={styles.field}>
-            <label htmlFor="email" className={styles.label}>
-              Email
-            </label>
+            <span className={styles.label}>— email —</span>
             <input
-              type="email"
-              id="email"
-              name="email"
               className={styles.input}
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               required
             />
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="password" className={styles.label}>
-              Password
-            </label>
+            <span className={styles.label}>— пароль —</span>
             <input
-              type="password"
-              id="password"
-              name="password"
               className={styles.input}
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
               required
             />
           </div>
 
-          {isLogin && (
+          {mode === 'login' && (
             <div className={styles.forgotPassword}>
-              <a href="#" className={styles.forgotLink}>
-                Forgot password?
-              </a>
+              <button type="button" className={styles.forgotLink}>
+                забыли пароль?
+              </button>
             </div>
           )}
 
           <button type="submit" className={styles.submitButton}>
-            {isLogin ? 'Log in' : 'Sign up'}
+            {mode === 'login' ? 'войти →' : 'создать аккаунт →'}
           </button>
         </form>
-
-        <div className={styles.switch}>
-          <span className={styles.switchText}>
-            {isLogin ? "Don't have an account? " : 'Already have an account? '}
-          </span>
-          <button
-            type="button"
-            className={styles.switchButton}
-            onClick={() => setIsLogin(!isLogin)}
-          >
-            {isLogin ? 'Sign up' : 'Log in'}
-          </button>
-        </div>
       </div>
     </div>
   )

@@ -1,121 +1,242 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from '../App.module.scss'
-import image1 from '../../assets/image/1.jpg'
-import image2 from '../../assets/image/2.jpg'
-import image3 from '../../assets/image/3.jpg'
-import image14 from '../../assets/image/14.jpg'
-import image27 from '../../assets/image/27.jpg'
-import image24 from '../../assets/image/24.jpg'
-import image26 from '../../assets/image/26.jpg'
-import image15 from '../../assets/image/15.jpg'
-import image31 from '../../assets/image/31.jpg'
-import image30 from '../../assets/image/30.jpg'
-
+import magazin from '../../assets/image/magazin.jpg'
+import tt from '../../assets/image/tt.jpg'
+import tk from '../../assets/image/tk.jpg'
+import sl from '../home/HomePage.module.scss'
+import drama from '../../assets/image/drama.jpg'
+import natura from '../../assets/image/nature.jpg'
+import classic from '../../assets/image/classic.jpg'
+import romance from '../../assets/image/romance.jpg'
+import gamin from '../../assets/image/gamin.jpg'
+import softdrama from '../../assets/image/softdarama.jpg'
+import silk from '../../assets/image/silk.jpg'
+import linen from '../../assets/image/linen.jpg'
+import yy from '../../assets/image/yy.jpg'
+import ax from '../../assets/image/ax.jpg'
+import glasses from '../../assets/image/glasses.jpg'
+import hat from '../../assets/image/hat.jpg'
+import back from '../../assets/image/back.jpg'
+import textil from '../../assets/image/textil.jpg'
 
 
 interface HomePageProps {
   onStartTest: () => void
 }
+type StyleCard =
+  | {
+      id: number
+      variant: 'magazines'
+      eyebrow?: string
+      title: string
+      description: string
+      images: string[] // 2 обложки
+    }
+  | {
+      id: number
+      variant: 'fabrics'
+      eyebrow?: string
+      title: string
+      description: string
+      images: { src: string; label: string }[] // 4 ткани
+    }
+  | {
+      id: number
+      variant: 'accessories'
+      eyebrow?: string
+      title: string
+      description: string
+      hero: string
+      thumbs: { src: string; label: string }[]
+    }
+  | {
+      id: number
+      variant: 'silhouettes'
+      eyebrow?: string
+      title: string
+      description: string
+      images: { src: string; label: string }[] // 2-3 силуэта
+    }
 
-const styleCards = [
+const kibbeTypes = [
+  { id: 'dramatic',      caption: 'драматик',      callout: 'драматик',      image: drama },
+  { id: 'natural',       caption: 'натурал',       callout: 'натурал',       image: natura },
+  { id: 'classic',       caption: 'классик',       callout: 'классик',       image: classic },
+  { id: 'romantic',      caption: 'романтик',      callout: 'романтик',      image: romance },
+  { id: 'gamine',        caption: 'гамин',         callout: 'гамин',         image: gamin },
+  { id: 'softDramatic',  caption: 'софт драматик', callout: 'софт драматик', image: softdrama },
+]
+
+const styleCards: StyleCard[] = [
   {
     id: 1,
-    label: 'Minimal',
-    title: 'Clean minimal look',
-    description: 'Soft colors, simple shapes and maximum clarity in every detail.',
-    image: [image15, image31]
+    variant: 'magazines',
+    title: 'Бумажная мода',
+    description: 'Раньше, до эпохи Instagram и TikTok, у моды был свой ритуал — глянцевый и шуршащий. Девушки выстраивались в очереди у киосков, ждали свежий номер «Бурды», Vogue или «Космополитен». Журнал был не просто покупкой — это был пропуск в мир последних тенденций..',
+    images: [magazin, tt]
   },
   {
-    id: 2,
-    label: 'Classic',
-    title: 'Timeless classic',
-    description: 'Structured silhouettes, balance and calm confident energy.',
-    image: [image1, image2, image3]
+  id: 2,
+  variant: 'fabrics',
+  title: 'Язык материалов',
+  description: 'Шёлк, шерсть, лён, бархат — каждая ткань рассказывает свою историю. Лён помнит средневековые ярмарки, шёлк — Великий шёлковый путь, кашемир — индийских ремесленников. Выбирая материал, мы выбираем не просто фактуру, а целую культуру.',
+  images: [
+      { src: silk,    label: 'шёлк' },
+      { src: linen,   label: 'лён' },
+      { src: textil,  label: 'бархат' },
+      { src: tk,  label: 'да хуй его знает' },
+    ],
   },
   {
     id: 3,
-    label: 'Street',
-    title: 'Street energy',
-    description: 'Relaxed, bold and expressive — perfect for everyday movement.',
-    image: [image27, image14, image30]
+    variant: 'accessories',
+    title: 'Деталь решает всё',
+    description: 'Ремень, серьги, шарф — то, что превращает три случайные вещи в образ. Современная мода устала от «всё новое и сразу»: один акцент важнее десяти трендовых вещей. Аксессуар — это подпись стиля, маленькая, но узнаваемая.',
+      hero: ax,
+      thumbs: [
+        { src: glasses,  label: 'очки' },
+        { src: tt, label: 'серьги' },
+        { src: ax,    label: 'шарф' },
+        { src: yy,    label: 'кольца' },
+      ],
   },
   {
     id: 4,
-    label: 'Romantic',
-    title: 'Soft romantic',
-    description: 'Light textures, flowing lines and gentle, soft mood.',
-    image: [image26, image24]
+    variant: 'silhouettes',
+    title: 'Главное — линия',
+    description: 'Силуэт — это первое, что видит глаз. До цвета, до фактуры, до деталей. Прямой или приталенный, узкий или объёмный — он рассказывает о человеке за секунду. В моде нет случайных линий: каждый силуэт работает либо на тебя, либо против тебя.',
+    images: [
+      { src: hat, label: 'со спины' },
+      { src: back, label: 'в профиль' },
+    ],
   },
 ]
-const carouselImages = styleCards.flatMap(card => card.image)
-console.log(carouselImages)
+
+const carouselImages: string[] = styleCards.flatMap(card => {
+  if (card.variant === 'magazines') return card.images
+  if (card.variant === 'fabrics') return card.images.map(img => img.src)
+  if (card.variant === 'accessories') return [card.hero, ...card.thumbs.map(t => t.src)]
+  if (card.variant === 'silhouettes') return card.images.map(img => img.src)
+  return []
+})
 
 const PATH = `
-M 348 2
-C 308 15, 315 17, 235 40
-C 155 63, 148 48, 120 69
-C 92 90, 159 80, 156 101
-C 153 122, 119 106, 111 130
-C 103 155, 118 140, 134 171
-C 150 203, 165 194, 157 220
-C 149 246, 131 222, 112 244
-C 93 266, 93 278, 103 283
-C 113 288, 114 257, 141 257
-C 168 257, 152 279, 181 282
-C 210 285, 195 266, 224 266
-C 253 266, 233 276, 263 282
-C 293 288, 288 262, 309 282
-C 330 302, 326 320, 322 340
-C 318 360, 292 328, 298 338
-C 304 349, 310 353, 338 370
-C 366 387, 374 379, 377 387
-C 380 395, 343 386, 347 393
-C 351 400, 395 387, 388 408
-C 381 429, 365 432, 327 453
-C 289 474, 292 447, 280 468
-C 268 489, 287 483, 293 513
-C 299 543, 313 539, 297 554
-C 281 569, 277 541, 248 555
-C 219 569, 246 582, 214 595
-C 182 608, 190 584, 157 591
-C 124 598, 148 598, 120 614
-C 92 630, 91 618, 76 637
-C 61 656, 66 651, 78 667
-C 90 683, 89 668, 109 682
-C 129 696, 142 694, 134 707
-C 126 720, 102 704, 85 720
-C 68 736, 72 738, 86 752
-C 100 766, 96 750, 125 760
-C 154 770, 142 762, 170 780
-C 198 798, 204 786, 204 812
-C 204 838, 165 834, 170 854
-C 175 874, 188 852, 217 869
-C 246 886, 227 877, 254 903
-C 281 929, 278 910, 293 944
-C 308 978, 302 979, 298 1001
-C 294 1023, 279 990, 282 1008
-C 285 1026, 283 1039, 306 1052
-C 329 1065, 328 1038, 348 1045
-C 368 1052, 373 1054, 363 1073
-C 353 1092, 323 1081, 320 1098
-C 317 1116, 353 1100, 354 1123
-C 355 1146, 351 1148, 323 1163
-C 295 1178, 301 1148, 275 1165
-C 249 1183, 277 1201, 248 1213
-C 219 1225, 220 1181, 191 1200
-C 162 1219, 196 1240, 164 1266
-C 132 1292, 136 1261, 100 1275
-C 64 1289, 59 1288, 60 1305
-C 61 1322, 72 1322, 102 1324
-C 132 1326, 112 1311, 147 1311
-C 182 1311, 166 1319, 203 1323
-C 240 1327, 243 1322, 254 1323
-C 265 1324, 242 1326, 235 1327
+M 350 0
+C 200 30, 100 80, 150 160
+C 200 240, 380 260, 480 320
+C 580 380, 700 420, 650 510
+C 600 600, 420 580, 280 620
+C 140 660, 40 700, 80 800
+C 120 900, 280 880, 400 850
+C 520 820, 640 800, 700 880
+C 760 960, 680 1060, 520 1080
+C 360 1100, 180 1080, 60 1140
+C -60 1200, -40 1320, 100 1370
+C 240 1420, 420 1390, 540 1430
+C 660 1470, 780 1500, 760 1600
+C 740 1700, 580 1750, 400 1730
+C 220 1710, 40 1680, -60 1760
+C -160 1840, -100 1960, 80 2010
+C 260 2060, 460 2030, 600 2080
+C 740 2130, 860 2200, 820 2300
+C 780 2400, 600 2440, 420 2410
+C 240 2380, 60 2350, -40 2440
+C -140 2530, -80 2660, 120 2700
+C 320 2740, 540 2700, 700 2750
+C 860 2800, 940 2900, 880 3000
+C 820 3100, 600 3120, 400 3080
+C 200 3040, 0 3000, -100 3090
+C -200 3180, -120 3320, 100 3370
+C 320 3420, 580 3380, 760 3430
+C 940 3480, 980 3600, 880 3700
+C 780 3800, 540 3810, 340 3770
+C 140 3730, -60 3700, -180 3800
+C -300 3900, -200 4060, 80 4110
+C 360 4160, 660 4120, 860 4180
+C 1060 4240, 1080 4380, 920 4480
+C 760 4580, 480 4580, 260 4540
+C 40 4500, -180 4480, -260 4580
+C -340 4680, -200 4830, 100 4880
+C 400 4930, 740 4880, 940 4940
+C 1140 5000, 1100 5160, 880 5240
+C 660 5320, 360 5300, 100 5260
+C -160 5220, -360 5220, -360 5340
+C -360 5460, -120 5570, 200 5610
+C 520 5650, 880 5620, 1080 5680
+C 1280 5740, 1280 5900, 1020 6000
+C 760 6100, 380 6080, 80 6040
+C -220 6000, -440 6000, -440 6120
+C -440 6240, -160 6360, 200 6400
+C 560 6440, 920 6420, 1100 6480
+C 1280 6540, 1300 6680, 1040 6780
+C 780 6880, 360 6860, 60 6820
+C -240 6780, -480 6790, -460 6900
 `;
 const center = Math.floor(carouselImages.length / 2)
 
+const renderCardContent = (card: StyleCard) => {
+  switch (card.variant) {
+    case 'magazines':
+      return (
+        <div className={`${styles.cardMedia} ${styles.cardMediaMagazines}`}>
+          {card.images.map((img, i) => (
+            <div
+              key={i}
+              className={`${styles.magazineCover} ${i === 0 ? styles.magCoverFirst : styles.magCoverSecond}`}
+            >
+              <img src={img} alt={`${card.title} ${i}`} />
+            </div>
+          ))}
+          <span className={styles.magazineStamp}>— vintage edition —</span>
+        </div>
+      )
+
+    case 'fabrics':
+      return (
+        <div className={`${styles.cardMedia} ${styles.cardMediaFabrics}`}>
+          {card.images.map((img, i) => (
+            <figure key={i} className={styles.fabricSwatch}>
+              <img src={img.src} alt={img.label} />
+              <figcaption className={styles.fabricLabel}>— {img.label} —</figcaption>
+            </figure>
+          ))}
+        </div>
+      )
+
+    case 'accessories':
+      return (
+        <div className={`${styles.cardMedia} ${styles.cardMediaAccessories}`}>
+          <div className={styles.accessoryHero}>
+            <img src={card.hero} alt={card.title} />
+            <span className={styles.accessoryHeroTag}>— hero piece —</span>
+          </div>
+          <div className={styles.accessoryThumbs}>
+            {card.thumbs.map((thumb, i) => (
+              <figure key={i} className={styles.accessoryThumb}>
+                <img src={thumb.src} alt={thumb.label} />
+                <figcaption>{thumb.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      )
+
+    case 'silhouettes':
+      return (
+        <div className={`${styles.cardMedia} ${styles.cardMediaSilhouettes}`}>
+          {card.images.map((img, i) => (
+            <figure key={i} className={styles.silhouetteFrame}>
+              <img src={img.src} alt={img.label} />
+              <figcaption>— {img.label} —</figcaption>
+            </figure>
+          ))}
+        </div>
+      )
+  }
+}
+
 const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const cardsRef = useRef<(HTMLElement | null)[]>([])
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
   const [scrollProgress, setScrollProgress] = useState(0)
 
@@ -177,13 +298,16 @@ const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
       </div>
 
       <section className={styles.hero}>
+        <aside className={styles.heroSideText}>
+            — style code · vol 01 · 2026 —
+          </aside>
         <div className={styles.heroContent}>
           <p className={styles.mainLogo}>ZM</p>
-          <p className={styles.heroEyebrow}>платформа</p>
-          <h1 className={styles.heroTitle}>You choose your style</h1>
+          <p className={styles.heroEyebrow}>— выпуск №01 —</p>
+          <h1 className={styles.heroTitle}>Твой стиль говорит<br/>раньше тебя</h1>
           <p className={styles.heroSubtitle}>
-            Discover, experiment and create looks that feel truly yours. Simple tools, clear
-            steps, and inspiration tailored to you.
+            Платформа, которая помогает тебе понять, как мода работает именно с твоей внешностью.
+            Без шаблонов и универсальных советов — только то, что подходит тебе.
           </p>
           <div className={styles.heroActions}>
             {/* <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={onStartTest}>
@@ -197,10 +321,12 @@ const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
       <section className={styles.stylesSection}>
         <div className={styles.stylesHeader}>
           <p className={styles.stylesEyebrow}></p>
-          <h2 className={styles.stylesTitle}>Твой стиль говорит раньше тебя</h2>
+          <h2 className={styles.stylesTitle}>Стиль начинается с того, кто ты</h2>
           <p className={styles.stylesSubtitle}>
-            Each card is one direction. When you move down the page, the cards smoothly flow from
-            the sides to the center - so you can feel every style separately.
+            Не с трендов. Не с подборок Pinterest. Не с того, что идёт твоей подруге.
+            Каждый человек носит свою историю на коже — в линиях лица, в форме плеч,
+            в длине шеи. Эти детали складываются в типаж — твой собственный визуальный код.
+            Узнай его, и одежда перестанет быть случайной.
           </p>
         </div>
 
@@ -238,33 +364,42 @@ const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
           </button>
         </div>
         <div className={styles.stylesGrid}>
-          {styleCards.map((style, index) => (
-            <div
-              key={style.id}
+          {styleCards.map((card, index) => (
+            <article
+              key={card.id}
               data-index={index}
-              ref={el => {
-                cardsRef.current[index] = el
+              ref={el => { 
+                cardsRef.current[index] = el 
               }}
-              className={`${styles.styleCard} ${
-                index % 2 === 0 ? styles.fromLeft : styles.fromRight
+              className={`${styles.styleCard} ${styles[`variant-${card.variant}`]} ${
+                index % 2 === 0 ? styles.textRight : styles.textLeft
               } ${visibleCards.has(index) ? styles.inView : ''}`}
             >
-            {Array.isArray(style.image) && 
-              style.image.map((img, i) => (
-                <img
-                key={i}
-                src={img}
-                alt={`${style.title} ${i}`}
-                className={styles.styleImage}
-                />
-              ))}
-              <div className={styles.styleBadge}>{style.label}</div>
-              <h3 className={styles.styleTitle}>{style.title}</h3>
-              <p className={styles.styleDescription}>{style.description}</p>
-            </div>
+              {renderCardContent(card)}
+              
+
+             <div className={styles.cardText}>
+                {card.eyebrow && <span className={styles.cardEyebrow}>{card.eyebrow}</span>}
+                <h3 className={styles.styleTitle}>{card.title}</h3>
+                <p className={styles.styleDescription}>{card.description}</p>
+              </div>
+            </article>
           ))}
         </div>
       </section>
+          <section className={sl.kibbeStage}>
+            <div className={sl.kibbeRow}>
+              {kibbeTypes.map(type => (
+                <div key={type.id} className={sl.kibbePerson}>
+                  <div className={sl.kibbeCallout}>{type.callout}</div>
+                  <div className={sl.kibbePortrait}>
+                    <img src={type.image} alt={type.caption} loading="lazy" />
+                  </div>
+                  <div className={sl.kibbeCaption}>{type.caption}</div>
+                </div>
+              ))}
+            </div>
+          </section>
     </div>
   )
 }

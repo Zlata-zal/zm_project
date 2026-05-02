@@ -1,3 +1,8 @@
+import React, { useState } from 'react'
+import styles from './TestPage.module.scss'
+import { type BodyParams } from '../../widgets/auth/AuthModal'
+
+
 const TestPage: React.FC<TestPageProps> = ({ onBack, onBodySubmit }) => {
   const [selected, setSelected] = useState<string | null>(null)
   const [body, setBody] = useState({

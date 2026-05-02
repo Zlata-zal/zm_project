@@ -4,7 +4,7 @@ import styles from './Header.module.scss'
 
 interface HeaderProps {
   user: AuthUser | null
-  onNavigate: (to: 'home' | 'test' | 'account' | 'wardrobe') => void
+  onNavigate: (to: 'home' | 'test' | 'profile' | 'wardrobe') => void
   onAuthSuccess: (payload: { user: AuthUser; mode: 'login' | 'register' }) => void
 }
 
@@ -19,19 +19,19 @@ const Header: React.FC<HeaderProps> = ({ user, onNavigate, onAuthSuccess }) => {
         </div>
         <nav className={styles.headerNav}>
           <button className={styles.navButton} onClick={() => onNavigate('home')}>
-            Home
+            Главная
           </button>
           <button className={styles.navButton} onClick={() => onNavigate('test')}>
-            Tests
+            Статьи
           </button>
           <button
             className={styles.navButton}
             onClick={() => {
-              if (user) onNavigate('account')
+              if (user) onNavigate('profile')
               else setIsAuthModalOpen(true)
             }}
           >
-            Account
+            Профиль
           </button>
           <button
             className={`${styles.navButton} ${styles.navPrimary}`}
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ user, onNavigate, onAuthSuccess }) => {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-        onAuthSuccess={payload => {
+        onSuccess={payload => {
           onAuthSuccess(payload)
           setIsAuthModalOpen(false)
         }}

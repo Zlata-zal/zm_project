@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../widgets/Layout'
 import TestPage from '../pages/test/TestPage'
-import AccountPage from '../pages/account/AccountPage'
+import Profile from '../pages/account/Profile'
 import WardrobePage from '../pages/wardrobe/WardrobePage'
-import { type AuthUser, type BodyParams } from '../widgets/auth/AuthModal'
+import { type AuthUser } from '../widgets/auth/AuthModal'
+import type { KibbeResult } from '../pages/test/types'
 import HomePage from './home/HomePage'
 
 const App: React.FC = () => {
   const [isTestOpen, setIsTestOpen] = useState(false)
-  const [activeView, setActiveView] = useState<'home' | 'test' | 'account' | 'wardrobe'>('home')
+  const [activeView, setActiveView] = useState<'home' | 'test' | 'profile' | 'wardrobe'>('home')
   const [user, setUser] = useState<AuthUser | null>(null)
 
   useEffect(() => {
@@ -22,7 +23,6 @@ const App: React.FC = () => {
 
   const handleAuthSuccess = ({
     user: nextUser,
-    mode,
   }: {
     user: AuthUser
     mode: 'login' | 'register'
@@ -34,17 +34,42 @@ const App: React.FC = () => {
       // ignore
     }
 
-    if (mode === 'register') {
-      setActiveView('account')
-      setIsTestOpen(false)
-    }
+    setActiveView('profile')
+    setIsTestOpen(false)
   }
 
-  const navigate = (to: 'home' | 'test' | 'account' | 'wardrobe') => {
+ 
+  const handleTestFinish = (result: KibbeResult) => {
+    console.log('App: получен результат теста', result)
+
+    // Если пользователь не авторизован — сохраним результат во временное хранилище
+    if (!user) {
+      try {
+        localStorage.setItem('zm_pending_result', JSON.stringify(result))
+      } catch { /* ignore */ }
+      
+      setActiveView('home')
+      setIsTestOpen(false)
+      return
+    }
+
+    // Сохраняем результат в user
+    const updated: AuthUser = { ...user, kibbeResult: result }
+    setUser(updated)
+    try {
+      localStorage.setItem('zm_user', JSON.stringify(updated))
+    } catch { /* ignore */ }
+
+    // Переходим в профиль
+    setActiveView('profile')
+    setIsTestOpen(false)
+  }
+
+  const navigate = (to: 'home' | 'test' | 'profile' | 'wardrobe') => {
     setActiveView(to)
     setIsTestOpen(to === 'test')
   }
-
+ // === ТЕСТ ===
   if (activeView === 'test' || isTestOpen) {
     return (
       <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
@@ -53,36 +78,24 @@ const App: React.FC = () => {
             setIsTestOpen(false)
             setActiveView('home')
           }}
-          onBodySubmit={(body: BodyParams) => {
-            if (!user) return
-            const updated: AuthUser = { ...user, body }
-            setUser(updated)
-            try {
-              localStorage.setItem('zm_user', JSON.stringify(updated))
-            } catch {
-              // ignore
-            }
-            setActiveView('account')
-            setIsTestOpen(false)
-          }}
+          onFinish={handleTestFinish}     
         />
       </Layout>
     )
   }
 
-  if (activeView === 'account') {
+  
+  if (activeView === 'profile') {
     return (
       <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
         {user ? (
-          <AccountPage
+          <Profile
             user={user}
             onLogout={() => {
               setUser(null)
               try {
                 localStorage.removeItem('zm_user')
-              } catch {
-                // ignore
-              }
+              } catch { /* ignore */ }
               setActiveView('home')
             }}
             onOpenWardrobe={() => setActiveView('wardrobe')}
@@ -96,29 +109,20 @@ const App: React.FC = () => {
             onBack={() => {
               setActiveView('home')
             }}
-            onBodySubmit={(body: BodyParams) => {
-              if (!user) return
-              const updated: AuthUser = { ...user, body }
-              setUser(updated)
-              try {
-                localStorage.setItem('zm_user', JSON.stringify(updated))
-              } catch {
-                // ignore
-              }
-              setActiveView('account')
-            }}
+            onFinish={handleTestFinish}    
           />
         )}
       </Layout>
     )
   }
 
+  
   if (activeView === 'wardrobe') {
     return (
       <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
         <WardrobePage
           user={user}
-          onBack={() => setActiveView('account')}
+          onBack={() => setActiveView('profile')}
           onMoreQuestions={() => {
             setActiveView('test')
             setIsTestOpen(true)
@@ -128,6 +132,7 @@ const App: React.FC = () => {
     )
   }
 
+  
   return (
     <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
       <HomePage onStartTest={() => setIsTestOpen(true)} />

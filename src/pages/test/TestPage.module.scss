@@ -1,233 +1,378 @@
 @use '../../assets/styles/variables' as *;
 
+// Локальная палитра (как в Profile)
+$grey-bg: #eeece6;
+$grey-bg-light: #f5f1e8;
+$grey-text-primary: #383d41;
+$grey-text-secondary: #555e63;
+$grey-text-tertiary: #8e979e;
+$grey-border: rgba(56, 61, 65, 0.15);
+
 .testPage {
-  max-width: 960px;
-  width: 100%;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  //margin-left: auto;
+  background: $grey-bg;
+  min-height: 100vh;
+  padding: 60px 56px 40px;
+  font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+  position: relative;
+  max-width: 1320px;
+  margin: 0 auto;
 }
 
-.headerRow {
+// === ПРОГРЕСС-ПОЛОСКА СВЕРХУ ===
+.progressBar {
+  position: absolute;
+  top: 32px;
+  left: 56px;
+  right: 56px;
+  height: 1px;
+  background: rgba($grey-text-primary, 0.1);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: $color-primary;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 8px rgba($color-primary, 0.3);
+}
+
+// === EDGE-INFO ===
+.edgeInfo {
+  position: absolute;
+  top: 12px;
+  left: 56px;
+  right: 56px;
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.stepLabel {
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
+  align-items: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 9px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba($color-text-secondary, 0.9);
-  margin-bottom: 0.5rem;
-}
+  color: $grey-text-tertiary;
 
-.title {
-  font-size: clamp(1.9rem, 3vw, 2.4rem);
-  margin: 0 0 0.75rem;
-}
-
-.subtitle {
-  margin: 0;
-  font-size: 0.98rem;
-  max-width: 30rem;
-  color: rgba($color-text-secondary, 0.9);
-}
-
-.backButton {
-  align-self: flex-start;
-  border-radius: 999px;
-  border: 1px solid rgba($color-secondary-soft, 0.5);
-  padding: 0.4rem 1rem;
-  font-size: 0.85rem;
-  background: rgba($color-bg-deep, 0.6);
-  color: rgba($color-text-primary, 0.96);
-  cursor: pointer;
-  transition:
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.12s ease;
-
-  &:hover {
-    background: rgba($color-primary, 0.7);
-    border-color: rgba($color-primary-soft, 0.8);
-    transform: translateY(-1px);
+  b {
+    color: $color-primary;
+    font-weight: 500;
+    font-style: normal;
   }
 }
 
-.optionsArea {
-  position: relative;
-  min-height: 260px;
+// === ОБЩАЯ СЕТКА ===
+.layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 56px;
+  align-items: start;
+  margin-top: 24px;
 }
 
-.bodyForm {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem 1.5rem;
+// === ЛЕВАЯ КОЛОНКА ===
+.left {
+  position: sticky;
+  top: 60px;
+  padding-right: 36px;
+  border-right: 0.5px solid rgba($grey-text-primary, 0.18);
 }
 
-.bodyField {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+.stepNum {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(80px, 12vw, 140px);
+  color: rgba($color-primary, 0.12);
+  line-height: 0.85;
+  font-weight: 500;
+  margin-bottom: 18px;
+  user-select: none;
+  letter-spacing: -0.02em;
 }
 
-.bodyLabel {
-  font-size: 0.85rem;
-  color: rgba($color-text-secondary, 0.95);
-}
-
-.bodyInput,
-.bodySelect {
-  padding: 0.55rem 0.75rem;
-  border-radius: 0.6rem;
-  border: 1px solid rgba($color-secondary-soft, 0.45);
-  background: rgba($color-bg-deep, 0.7);
-  color: rgba($color-text-primary, 0.98);
-  font-size: 0.9rem;
-  font-family: inherit;
-}
-
-.bodyInput::placeholder {
-  color: rgba($color-text-secondary, 0.6);
-}
-
-.saveButtonRow {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.saveButton {
-  border-radius: 999px;
-  border: 1px solid transparent;
-  padding: 0.55rem 1.4rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, $color-primary, $color-primary-soft, $color-secondary);
-  color: $color-surface-light-start;
-  cursor: pointer;
-}
-
-.optionCard {
-  position: relative;
-  border-radius: 1.25rem;
-  padding: 1.0rem 1.0rem 1.25rem;
-  border: 1px solid rgba($color-secondary-soft, 0.35);
-  background: radial-gradient(circle at top left, rgba($color-bg-deep, 0.96), $color-bg-base);
-  color: rgba($color-text-primary, 0.98);
-  text-align: left;
-  cursor: pointer;
-  overflow: hidden;
+.eyebrow {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $color-primary;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  box-shadow:
-    0 18px 45px rgba($color-bg-deep, 0.9),
-    0 0 0 1px rgba($color-bg-deep, 0.8);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease;
+  gap: 10px;
+
+  &::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: $color-primary;
+  }
+}
+
+.title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 2.8vw, 2rem);
+  color: $grey-text-primary;
+  font-weight: 500;
+  line-height: 1.18;
+  margin: 0 0 16px;
+  letter-spacing: -0.005em;
+}
+
+.subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  color: $grey-text-secondary;
+  line-height: 1.55;
+  margin: 0;
+}
+
+// === ПРАВАЯ КОЛОНКА ===
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 0.5px solid $grey-border;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  position: relative;
+  font-family: inherit;
 
   &:hover {
-    transform: translateY(-6px);
-    border-color: rgba($color-surface-light-end, 0.8);
-    box-shadow:
-      0 28px 70px rgba($color-bg-deep, 1),
-      0 0 0 1px rgba($color-secondary-soft, 0.7);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba($color-primary, 0.35);
+    transform: translateX(4px);
+
+    .optionArrow {
+      opacity: 1;
+      color: $color-primary;
+      transform: translateX(2px);
+    }
   }
 }
 
 .optionSelected {
-  border-color: rgba($color-primary-soft, 0.95);
-  background: radial-gradient(circle at top left, rgba($color-primary, 0.24), $color-bg-base);
-  box-shadow:
-    0 26px 70px rgba($color-secondary, 0.4),
-    0 0 0 1px rgba($color-secondary-soft, 0.7);
+  background: $color-primary !important;
+  border-color: $color-primary !important;
+  transform: translateX(4px);
+
+  .optionLetter {
+    color: #c9a96e !important;
+  }
+
+  .optionText {
+    color: $white-blue !important;
+  }
+
+  .optionArrow {
+    opacity: 1 !important;
+    color: #c9a96e !important;
+  }
 }
 
-.bubbleIndex {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  background: radial-gradient(circle at 20% 0%, $color-primary, $color-secondary-soft);
-  box-shadow:
-    0 0 15px rgba($color-secondary-soft, 0.8),
-    0 0 35px rgba($color-primary, 0.6);
+.optionLetter {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 13px;
+  color: $color-primary;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  min-width: 48px;
+  flex-shrink: 0;
+  transition: color 0.2s;
 }
 
 .optionText {
-  font-size: 0.98rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 14px;
+  color: $grey-text-primary;
+  line-height: 1.5;
+  flex: 1;
+  transition: color 0.2s;
 }
 
-/* Floating animations */
-@keyframes float1 {
-  0%,
-  100% {
-    transform: translateY(0px);
+.optionArrow {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: rgba($color-primary, 0.4);
+  font-size: 16px;
+  margin-left: 8px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+// === НАВИГАЦИЯ ===
+.nav {
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 0.5px solid rgba($grey-text-primary, 0.15);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.navBack {
+  background: none;
+  border: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  color: $grey-text-secondary;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-align: left;
+  padding: 0;
+  justify-self: start;
+
+  &:hover {
+    color: $color-primary;
   }
-  50% {
-    transform: translateY(-10px);
+}
+
+.navProgress {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  color: $grey-text-tertiary;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.navNext {
+  padding: 12px 28px;
+  background: $color-primary;
+  color: $white-blue;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba($color-primary, 0.25);
+  justify-self: end;
+
+  &:hover:not(:disabled) {
+    background: darken($color-primary, 6%);
+    box-shadow: 0 8px 18px rgba($color-primary, 0.35);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: $grey-text-tertiary;
+    box-shadow: none;
   }
 }
 
-@keyframes float2 {
-  0%,
-  100% {
-    transform: translateY(4px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes float3 {
-  0%,
-  100% {
-    transform: translateY(-2px);
-  }
-  50% {
-    transform: translateY(8px);
-  }
-}
-
-.float1 {
-  animation: float1 7s ease-in-out infinite;
-}
-
-.float2 {
-  animation: float2 8.5s ease-in-out infinite;
-}
-
-.float3 {
-  animation: float3 6.5s ease-in-out infinite;
-}
-
-@media (max-width: 768px) {
+// === АДАПТИВ ===
+@media (max-width: 900px) {
   .testPage {
-    margin-top: 1.5rem;
+    padding: 60px 24px 32px;
   }
 
-  .headerRow {
-    flex-direction: column;
-    gap: 1.25rem;
+  .progressBar,
+  .edgeInfo {
+    left: 24px;
+    right: 24px;
   }
 
-  .optionsArea {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .left {
+    position: static;
+    padding-right: 0;
+    border-right: none;
+    padding-bottom: 24px;
+    border-bottom: 0.5px solid rgba($grey-text-primary, 0.18);
+  }
+
+  .stepNum {
+    font-size: 80px;
+    margin-bottom: 12px;
+  }
+
+  .nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .navProgress {
+    grid-column: 1 / -1;
+    text-align: center;
+    order: -1;
+    margin-bottom: 8px;
+  }
+
+  .option {
+    padding: 14px 18px;
+    gap: 12px;
+  }
+
+  .optionLetter {
+    min-width: 36px;
+    font-size: 12px;
   }
 }
 
+@media (max-width: 480px) {
+  .edgeInfo {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+
+    span:nth-child(2) {
+      display: none;
+    }
+  }
+
+  .testPage {
+    padding: 50px 16px 24px;
+  }
+
+  .progressBar,
+  .edgeInfo {
+    left: 16px;
+    right: 16px;
+  }
+
+  .stepNum {
+    font-size: 64px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .option {
+    padding: 12px 14px;
+  }
+
+  .optionText {
+    font-size: 13px;
+  }
+}

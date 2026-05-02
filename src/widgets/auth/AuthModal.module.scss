@@ -1,13 +1,21 @@
 @use '../../assets/styles/variables' as *;
 
+// Локальная палитра модалки
+$grey-bg: #eeece6;
+$grey-bg-light: #f5f1e8;
+$grey-text-primary: #383d41;
+$grey-text-secondary: #555e63;
+$grey-text-tertiary: #8e979e;
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba($color-bg-base, 0.85);
+  background: rgba(46, 10, 11, 0.55);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,16 +34,16 @@
 }
 
 .modal {
-  background: linear-gradient(135deg, rgba($color-bg-deep, 0.98), rgba($color-primary-hover, 0.95));
-  border: 1px solid rgba($color-secondary-soft, 0.2);
-  border-radius: 1.25rem;
-  padding: 2.5rem;
-  max-width: 440px;
+  background: $grey-bg-light;
+  border: 0.5px solid rgba($color-primary, 0.15);
+  border-radius: 16px;
+  padding: 36px 36px 32px;
+  max-width: 380px;
   width: 100%;
   position: relative;
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba($color-primary-soft, 0.1);
+    0 30px 80px rgba(46, 10, 11, 0.4),
+    0 0 0 1px rgba(245, 241, 232, 0.5);
   animation: slideUp 0.3s ease;
 }
 
@@ -52,142 +60,211 @@
 
 .closeButton {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 32px;
-  height: 32px;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border: 1px solid rgba($color-secondary-soft, 0.3);
-  background: rgba($color-bg-deep, 0.6);
-  color: $color-text-secondary;
-  font-size: 1.5rem;
-  line-height: 1;
+  border: none;
+  background: transparent;
+  color: $color-primary;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+  }
 
   &:hover {
-    background: rgba($color-secondary-soft, 0.2);
-    border-color: rgba($color-secondary-soft, 0.5);
+    background: rgba($color-primary, 0.08);
     transform: rotate(90deg);
   }
 }
 
 .header {
-  margin-bottom: 2rem;
+  margin-bottom: 22px;
   text-align: center;
 }
 
-.title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem;
-  background: linear-gradient(
-    135deg,
-    $color-surface-light-start,
-    $color-surface-light-mid,
-    $color-surface-light-end
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: $color-primary;
+  letter-spacing: 0.25em;
+  margin: 0 0 6px;
+  line-height: 1;
 }
 
-.subtitle {
-  font-size: 0.9rem;
-  color: rgba($color-text-secondary, 0.9);
+.logoMeta {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 9px;
+  color: $grey-text-tertiary;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
   margin: 0;
 }
 
+// === ПЕРЕКЛЮЧАТЕЛЬ ВХОД / РЕГИСТРАЦИЯ ===
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba($color-primary, 0.05);
+  border-radius: 50px;
+  padding: 4px;
+  margin-bottom: 22px;
+  position: relative;
+}
+
+.tabIndicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: $color-primary;
+  border-radius: 50px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba($color-primary, 0.25);
+}
+
+.tabIndicatorRight {
+  transform: translateX(100%);
+}
+
+.tab {
+  padding: 9px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $grey-text-tertiary;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 50px;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+
+  &.tabActive {
+    color: $white-blue;
+    font-weight: 600;
+  }
+}
+
+// === ФОРМА ===
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 14px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 5px;
+  position: relative;
 }
 
 .label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: $color-text-secondary;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $color-primary;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
+// === ВХОДНЫЕ ПОЛЯ — СВЕТЛЫЕ ===
 .input {
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba($color-secondary-soft, 0.3);
-  background: rgba($color-bg-deep, 0.6);
-  color: $color-text-primary;
-  font-size: 0.95rem;
-  font-family: inherit;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
+  padding: 11px 14px;
+  border: 0.5px solid rgba($color-primary, 0.15);
+  background: rgba(255, 255, 255, 0.85);  // ← светлый фон полей
+  border-radius: 8px;
+  color: $grey-text-primary;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.2s ease;
 
   &::placeholder {
-    color: rgba($color-text-secondary, 0.6);
+    color: rgba($color-primary, 0.3);
+    font-style: italic;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba($color-primary, 0.25);
   }
 
   &:focus {
     outline: none;
-    border-color: rgba($color-primary-soft, 0.6);
-    background: rgba($color-bg-deep, 0.8);
-    box-shadow: 0 0 0 3px rgba($color-primary-soft, 0.1);
+    background: #ffffff;  // ← на фокусе совсем белые
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.08);
   }
 }
 
+// === FORGOT PASSWORD ===
 .forgotPassword {
   text-align: right;
-  margin-top: -0.5rem;
+  margin-top: -4px;
+  margin-bottom: 6px;
 }
 
 .forgotLink {
-  font-size: 0.85rem;
-  color: rgba($color-primary-soft, 0.9);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $color-secondary;
+  letter-spacing: 0.05em;
+  cursor: pointer;
   text-decoration: none;
   transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'Playfair Display', Georgia, serif;
 
   &:hover {
-    color: $color-primary-soft;
+    color: $color-primary;
+    text-decoration: underline;
   }
 }
 
+// === КНОПКА SUBMIT ===
 .submitButton {
-  margin-top: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, $color-primary, $color-primary-soft, $color-secondary);
-  color: $color-surface-light-start;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: inherit;
+  margin-top: 6px;
+  padding: 13px;
+  background: $color-primary;
+  color: $white-blue;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease;
-  box-shadow:
-    0 10px 25px rgba($color-primary, 0.35),
-    0 0 0 1px rgba($color-primary-soft, 0.4);
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba($color-primary, 0.25);
+  transition: all 0.2s ease;
 
   &:hover {
-    background: linear-gradient(135deg, $color-primary-hover, $color-primary, $color-secondary-hover);
+    background: darken($color-primary, 6%);
+    box-shadow: 0 10px 22px rgba($color-primary, 0.35);
     transform: translateY(-1px);
-    box-shadow:
-      0 15px 35px rgba($color-primary, 0.5),
-      0 0 0 1px rgba($color-primary-soft, 0.5);
   }
 
   &:active {
@@ -195,39 +272,49 @@
   }
 }
 
+// === SWITCH (опциональный, если оставишь) ===
 .switch {
-  margin-top: 1.75rem;
+  margin-top: 18px;
   text-align: center;
-  font-size: 0.9rem;
-  color: rgba($color-text-secondary, 0.9);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 11px;
+  color: $grey-text-secondary;
 }
 
 .switchText {
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
 }
 
 .switchButton {
   background: none;
   border: none;
-  color: rgba($color-primary-soft, 0.9);
+  color: $color-primary;
   font-weight: 600;
   cursor: pointer;
   font-size: inherit;
   font-family: inherit;
   padding: 0;
+  text-decoration: underline;
   transition: color 0.2s ease;
 
   &:hover {
-    color: $color-primary-soft;
+    color: darken($color-primary, 6%);
   }
 }
 
+// === АДАПТИВ ===
 @media (max-width: 480px) {
   .modal {
-    padding: 2rem 1.5rem;
+    padding: 30px 24px 26px;
+    border-radius: 12px;
   }
 
-  .title {
-    font-size: 1.5rem;
+  .logo {
+    font-size: 22px;
+  }
+
+  .tab {
+    font-size: 10px;
   }
 }

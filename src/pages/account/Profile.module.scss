@@ -1,0 +1,905 @@
+@use '../../assets/styles/variables.scss' as *;
+
+
+$grey-bg: #eeece6;
+$grey-bg-darker: #d8d6cf;
+$grey-bg-lighter: #e8e6df;
+$grey-card: rgba(255, 255, 255, 0.5);
+$grey-section: rgba(255, 255, 255, 0.4);
+$grey-border: rgba(56, 61, 65, 0.12);
+$grey-border-soft: rgba(56, 61, 65, 0.08);
+$grey-text-primary: #383d41;
+$grey-text-secondary: #555e63;
+$grey-text-tertiary: #8e979e;
+
+.profile {
+  background: $grey-bg;
+  min-height: 100vh;
+  font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+}
+
+
+.hero {
+  aspect-ratio: 2.4 / 1;
+  position: relative;
+  background: linear-gradient(180deg, $grey-bg-lighter 0%, $grey-bg-darker 100%);
+  overflow: hidden;
+  border-bottom: 0.5px solid rgba($grey-text-primary, 0.15);
+}
+
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    line {
+      stroke: rgba($grey-text-primary, 0.06);
+      stroke-width: 0.5;
+
+      &:nth-child(-n + 3) {
+        stroke: rgba($grey-text-primary, 0.08);
+      }
+    }
+  }
+}
+
+.heroWatermark {
+  position: absolute;
+  bottom: -40px;
+  left: 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 280px;
+  color: rgba($color-primary, 0.06);
+  line-height: 0.8;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 500;
+}
+
+.heroCorners {
+  position: absolute;
+  top: 18px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba($grey-text-primary, 0.55);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  z-index: 2;
+
+  b {
+    color: $color-primary;
+    font-weight: 500;
+    font-style: normal;
+  }
+}
+
+.heroContent {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  right: 28px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+}
+
+.heroEyebrow {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $color-primary;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: $color-primary;
+  }
+}
+
+.heroName {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.5rem, 5vw, 60px);
+  color: $grey-text-primary;
+  line-height: 0.9;
+  font-weight: 400;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 2;
+}
+
+.heroTypeline {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 0.5px solid rgba($grey-text-primary, 0.2);
+}
+
+.heroTypeName {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  color: $color-primary;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.heroDivider {
+  color: rgba($grey-text-primary, 0.35);
+  font-size: 12px;
+}
+
+.heroTag {
+  color: rgba($grey-text-primary, 0.7);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.heroCtaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.heroCta {
+  padding: 11px 22px;
+  background: $color-primary;
+  color: $white-blue;
+  border: none;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba($color-primary, 0.2);
+
+  &:hover {
+    background: darken($color-primary, 6%);
+    transform: translateY(-1px);
+  }
+}
+
+.heroCtaMeta {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba($grey-text-primary, 0.5);
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+// === TIMELINE ===
+.timeline {
+  padding: 24px 28px 22px;
+  border-bottom: 0.5px solid $grey-border;
+  background: $grey-section;
+}
+
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.timelineLabel {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $grey-text-secondary;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.timelineProgress {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 11px;
+  color: $grey-text-secondary;
+  font-style: italic;
+
+  b {
+    color: $color-primary;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 13px;
+  }
+}
+
+.timelineBar {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.step {
+  flex: 1;
+  height: 32px;
+  position: relative;
+  padding: 4px;
+  border: 0.5px solid rgba($grey-text-primary, 0.2);
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $grey-text-tertiary;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.done {
+  background: rgba($color-primary, 0.06);
+  border-color: rgba($color-primary, 0.3);
+  color: $color-primary;
+}
+
+.current {
+  background: $color-primary;
+  border-color: $color-primary;
+  color: $white-blue;
+  font-weight: 600;
+}
+
+.locked {
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+.stepArrow {
+  color: rgba($grey-text-primary, 0.3);
+  font-style: italic;
+  font-size: 12px;
+}
+
+
+.metaRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(255, 255, 255, 0.3);
+  border-bottom: 0.5px solid $grey-border;
+}
+
+.metaCell {
+  padding: 22px 24px;
+  border-right: 0.5px solid $grey-border-soft;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+
+  &:hover {
+    background: rgba($color-primary, 0.04);
+  }
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.metaCellNum {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 9px;
+  color: $color-primary;
+  letter-spacing: 0.3em;
+}
+
+.metaCellVal {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  color: $grey-text-primary;
+  font-weight: 500;
+  line-height: 1;
+
+  em {
+    color: $color-primary;
+    font-style: italic;
+    font-size: 22px;
+  }
+}
+
+.metaCellLabel {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: $grey-text-secondary;
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.metaCellTrend {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 11px;
+  color: $color-primary;
+  letter-spacing: 0.05em;
+}
+
+
+.body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+
+.sidebar {
+  padding: 28px 22px;
+  border-right: 0.5px solid $grey-border;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 400px;
+}
+
+.sidebarGroupLabel {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: $grey-text-tertiary;
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+  padding: 8px 0 6px;
+  border-top: 0.5px solid rgba($grey-text-primary, 0.1);
+  margin-top: 8px;
+
+  &:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $grey-text-secondary;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    background: rgba($grey-text-primary, 0.05);
+    color: $grey-text-primary;
+  }
+
+  &.active {
+    background: rgba($color-primary, 0.06);
+    color: $color-primary;
+    font-weight: 600;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 18px;
+      background: $color-primary;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+      color: $grey-text-secondary;
+    }
+  }
+}
+
+.main {
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+
+.dividerSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba($grey-text-primary, 0.18);
+  }
+}
+
+.dividerSectionLabel {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 10px;
+  color: $color-primary;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+// кибба
+.kibbeCard {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 28px;
+  padding: 26px;
+  background: $grey-card;
+  border: 0.5px solid $grey-border;
+  border-radius: 4px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: $color-primary;
+  }
+}
+
+.kibbePortrait {
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #d8c4a8 0%, #c9a96e 70%, $color-primary 100%);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom center;
+    display: block;
+  }
+}
+
+.kibbeInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kibbeInfoEyebrow {
+  font-style: italic;
+  font-size: 10px;
+  color: $color-primary;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.kibbeInfoTitle {
+  font-size: 32px;
+  color: $grey-text-primary;
+  font-weight: 500;
+  margin: 0 0 12px;
+  line-height: 1.05;
+}
+
+.kibbeInfoText {
+  font-size: 12px;
+  line-height: 1.65;
+  color: $grey-text-secondary;
+  margin: 0;
+}
+
+.kibbeTraits {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.kibbeTrait {
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 0.5px solid rgba($grey-text-primary, 0.18);
+  border-radius: 50px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-primary;
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  color: $grey-text-primary;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.sectionLink {
+  font-style: italic;
+  font-size: 11px;
+  color: $color-primary;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+.wardrobeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.wardrobeItem {
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: linear-gradient(135deg, #d8c4a8, #c9a96e);
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.wardrobeItemAdd {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px dashed rgba($grey-text-primary, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: $color-primary;
+    fill: none;
+    stroke-width: 1.2;
+  }
+}
+
+.wardrobeItemAddText {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $color-primary;
+  font-style: italic;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.wardrobeTag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 3px 7px;
+  background: rgba(255, 255, 255, 0.85);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 8px;
+  color: $color-primary;
+  letter-spacing: 0.15em;
+  border-radius: 50px;
+}
+
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.previewCard {
+  background: $grey-card;
+  border: 0.5px solid $grey-border;
+  padding: 22px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  min-height: 130px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($grey-bg, 0.6);
+    backdrop-filter: blur(2px);
+  }
+}
+
+.previewLock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    stroke: $color-primary;
+    fill: none;
+    stroke-width: 1.5;
+  }
+}
+
+.previewLockText {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 9px;
+  color: $color-primary;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.previewCardNum {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 9px;
+  color: $color-primary;
+  letter-spacing: 0.2em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.previewCardTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  color: $grey-text-primary;
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+
+.previewCardDesc {
+  font-size: 10px;
+  line-height: 1.5;
+  color: $grey-text-secondary;
+  margin: 0;
+}
+
+
+@media (max-width: 900px) {
+  .hero {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .heroCtaBlock {
+    align-items: flex-start;
+  }
+
+  .timelineBar {
+    flex-direction: column;
+    gap: 6px;
+
+    .stepArrow {
+      transform: rotate(90deg);
+    }
+
+    .step {
+      width: 100%;
+    }
+  }
+
+  .metaRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metaCell {
+    border-right: 0.5px solid $grey-border-soft;
+    border-bottom: 0.5px solid $grey-border-soft;
+
+    &:nth-child(2n) {
+      border-right: none;
+    }
+
+    &:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: none;
+    border-bottom: 0.5px solid $grey-border;
+    gap: 6px;
+    padding: 16px;
+  }
+
+  .sidebarGroupLabel {
+    width: 100%;
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .navItem.active::before {
+    display: none;
+  }
+
+  .kibbeCard {
+    grid-template-columns: 1fr;
+  }
+
+  .kibbePortrait {
+    max-width: 200px;
+  }
+
+  .wardrobeGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .previewGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroWatermark {
+    font-size: 180px;
+  }
+
+  .heroName {
+    font-size: 2.2rem;
+  }
+
+  .wardrobeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+//доп
+.layersSection {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 0.5px solid $grey-border;
+  border-radius: 4px;
+  margin-top: 16px;
+}
+
+.layersTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  color: $grey-text-primary;
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.layerBlock {
+  margin-bottom: 14px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.layerLabel {
+  color: $color-primary;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.layerValue {
+  font-size: 14px;
+  color: $grey-text-primary;
+  margin-left: 6px;
+}
+
+.layerDesc {
+  font-size: 12px;
+  color: $grey-text-secondary;
+  margin: 4px 0 0;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.layerPalette {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.layerSwatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 0.5px solid rgba($grey-text-primary, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.layerDate {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 0.5px dashed rgba($grey-text-primary, 0.2);
+  font-size: 10px;
+  color: $grey-text-tertiary;
+  font-style: italic;
+}

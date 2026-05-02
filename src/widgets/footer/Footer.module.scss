@@ -1,51 +1,201 @@
-@use '../../assets/styles/variables' as *;
+@use '../../assets/styles/variables.scss' as *;
+
 
 .appFooter {
+  background: $white-blue;          // ← было $color-primary, стало кремовый
+  color: $color-primary;             // ← было $white-blue, стало бордовый
+  padding: 3rem 3rem 1.5rem;         // ← было 5rem 3rem 2rem
+  margin-top: 4rem;                  // ← было 6rem
+  font-family: $default-font;
+  border-top: 1px solid rgba($color-primary, 0.2);   // ← добавила, чтобы footer отделился от контента
+}
+
+
+.footerMeta {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem 1.4rem;
-  border-top: 1px solid rgba($color-secondary-soft, 0.2);
-  font-size: 0.85rem;
-  color: rgba($color-text-secondary, 0.9);
-  background: radial-gradient(circle at bottom, rgba($color-bg-deep, 0.95), transparent);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding-bottom: 0.775rem;          // ← чуть уменьшила
+  border-bottom: 1px solid rgba($color-primary, 0.2);   // ← поменяла цвет границы
+  margin-bottom: 2rem;               // ← было 3rem
+  opacity: 0.7;
+  font-style: italic;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+// === МАНИФЕСТ ===
+
+.footerManifesto {
+  text-align: center;
+  padding: 1rem 0 2rem;              // ← было 2rem 0 3rem
+}
+
+.footerEyebrow {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+  margin: 0 0 1rem;                  // ← было 1.5rem
+}
+
+.footerTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem); // ← было clamp(2.5rem, 5vw, 4rem) — стало компактнее
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+
+  em {
+    font-style: italic;
+    color: $color-primary-soft;      // ← было $white-yellow, теперь мягкий бордовый акцент
+  }
+}
+
+// === СЕТКА ===
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;                       // ← было 3rem
+  padding: 2rem 0;                   // ← было 3rem
+  border-top: 1px solid rgba($color-primary, 0.2);    // ← поменяла цвет границы
+  border-bottom: 1px solid rgba($color-primary, 0.2); // ← поменяла цвет границы
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLogo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;                   // ← было 32px
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  margin: 0 0 0.5rem;
+  color: $color-primary;             // явно бордовый
+}
+
+.footerTagline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 13px;                   // ← было 14px
+  opacity: 0.75;                     // ← немного приглушила
+  line-height: 1.4;
+  margin: 0;
+  max-width: 220px;
+  color: $color-text-primary;        // основной текст не бордовый
+}
+
+.footerColTitle {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.7;                      // ← было 0.6 — на светлом фоне нужно чуть ярче
+  margin: 0 0 0.875rem;              // ← было 1rem
+  font-weight: 600;
+  color: $color-primary;
+}
+
+.footerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 4px 0;                  // ← было 5px
+  }
+}
+
+// === ССЫЛКИ ===
+
+.footerLink {
+  font-family: $default-font;
+  font-size: 12px;
+  color: $color-text-primary;        // ← было $white-blue, теперь основной тёмный текст
+  text-decoration: none;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+  display: inline-block;
+
+  &:hover {
+    opacity: 1;
+    color: $color-primary;            // ← добавила: при ховере становится бордовым
+    transform: translateX(4px);
+  }
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;              // ← было 1.5rem
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  color: $color-text-secondary;      // явно серо-голубой для нижней строки
 }
 
 .footerLeft {
-  // Empty for now, can add styles if needed
+  font-style: normal;
+}
+
+.footerCenter {
+  font-style: italic;
 }
 
 .footerRight {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+
+  .footerLink:hover {
+    transform: none;
+  }
 }
 
-.footerLink {
-  color: inherit;
-  text-decoration: none;
-  position: relative;
 
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 1px;
-    background-color: rgba($color-surface-light-end, 0.85);
-    transition: width 0.18s ease;
+@media (max-width: 900px) {
+  .appFooter {
+    padding: 2.5rem 1.5rem 1.25rem;   // ← было 4rem 1.5rem 1.5rem
   }
 
-  &:hover::after {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footerMeta,
+  .footerBottom {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footerCenter {
+    order: 3;
     width: 100%;
   }
 }
 
-@media (max-width: 768px) {
-  .appFooter {
-    padding: 0.85rem 1rem 1.2rem;
+@media (max-width: 480px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footerTitle {
+    font-size: 1.75rem;               // ← было 2rem
+  }
+
+  .footerMeta {
     flex-direction: column;
-    gap: 0.4rem;
-    align-items: flex-start;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
