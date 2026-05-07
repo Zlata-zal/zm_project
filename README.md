@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ZM Style Platform
 
-Currently, two official plugins are available:
+**Your personal style, tailored to you.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A web app that builds a style profile from your appearance and preferences,
+and recommends looks that suit *you* — not a generic trend.
 
-## React Compiler
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=white)](https://vitejs.dev)
+[![Sass](https://img.shields.io/badge/Sass-1.97-cc6699?logo=sass&logoColor=white)](https://sass-lang.com)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ About
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+`ZM Style Platform` is a single-page web app that turns your personal data — body type, color undertones, lifestyle, taste — into a tailored set of style recommendations: **your palette**, **your silhouettes**, **your outfits**.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The same wardrobe gives different answers for different people. That's the whole point.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🛠 Stack
+
+| | |
+|---|---|
+| **UI** | React 19 + TypeScript 5.9 |
+| **Build** | Vite 7 |
+| **Styles** | Sass / SCSS |
+| **Lint** | ESLint 9 + `typescript-eslint` |
+
+---
+
+## 🚀 Getting started
+
+```bash
+git clone https://github.com/Zlata-zal/zm_project.git
+cd zm_project
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) and you're in.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev        
+npm run build      
+npm run preview   
+npm run lint      
 ```
+
+---
+
+## 📁 Project layout
+
+```
+zm_project/
+├── public/             # static assets
+├── src/                # app source (components, styles, logic)
+├── index.html          # Vite entry
+├── vite.config.ts      # Vite config
+├── tsconfig*.json      # TypeScript configs
+└── eslint.config.js    # ESLint config
+```
+
+---
+
+## 🗺 Roadmap
+
+- [ ] Style quiz / onboarding wizard
+- [ ] Personal color palette generator
+- [ ] Outfit recommendations by scenario (work, casual, evening)
+- [ ] Save & share your style profile
+- [ ] Dark mode
+
+---
+
+<div align="center">
+
+**ZM** — because style isn't one-size-fits-all. It's one-size-fits-*you*.
+
+</div>
