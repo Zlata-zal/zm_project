@@ -3,6 +3,7 @@ import styles from './Profile.module.scss'
 import type { AuthUser } from '../../widgets/auth/AuthModal'
 
 
+
 export interface ProfileProps {
   user: AuthUser
   onLogout: () => void
@@ -15,7 +16,7 @@ const navItems = [
   { id: 'kibbe',      label: 'мой типаж',   group: 'кабинет', requiresTest: true  },
   { id: 'wardrobe',   label: 'гардероб',    group: 'кабинет', requiresTest: true  },
   { id: 'favorites',  label: 'избранное',   group: 'кабинет', requiresTest: false },
-  { id: 'articles',   label: 'статьи',      group: 'кабинет', requiresTest: false },
+  { id: 'article',    label: 'статьи',      group: 'кабинет', requiresTest: false },
   { id: 'messages',   label: 'сообщения',   group: 'аккаунт', requiresTest: false },
   { id: 'settings',   label: 'настройки',   group: 'аккаунт', requiresTest: false },
 ] as const
@@ -37,11 +38,11 @@ const Profile: React.FC<ProfileProps> = ({
 }) => {
   const [activeNav, setActiveNav] = useState<string>('home')
 
-  // === Безопасное чтение данных пользователя ===
+ 
   const userName = user?.name || user?.email?.split('@')[0] || 'Гость'
   const watermarkLetter = userName.trim().charAt(0).toUpperCase() || '?'
 
-  // === Результат теста ===
+ 
   const result = user?.kibbeResult
 
   const hasResult = !!result
@@ -144,7 +145,7 @@ const Profile: React.FC<ProfileProps> = ({
                     {kibbeTypeName} · {kibbeChapter}
                   </span>
                   <span className={styles.heroDivider}>·</span>
-                  <span className={styles.heroTag}>moscow · 2026</span>
+                  <span className={styles.heroTag}>tomsk · 2026</span>
                 </>
               ) : (
                 <span className={styles.heroTag}>— типаж не определён —</span>
@@ -267,7 +268,7 @@ const Profile: React.FC<ProfileProps> = ({
                 </article>
               </section>
 
-              {/* === ДОПОЛНИТЕЛЬНЫЕ СЛОИ === */}
+             
               {result && (result.faceTypeName || result.colourSeasonName || result.aestheticName) && (
                 <section className={styles.layersSection}>
                   <h3 className={styles.layersTitle}>Дополнительные слои</h3>
@@ -291,7 +292,7 @@ const Profile: React.FC<ProfileProps> = ({
                       )}
                       {result.colourPalette && result.colourPalette.length > 0 && (
                         <div className={styles.layerPalette}>
-                          {result.colourPalette.map((hex, i) => (
+                          {result.colourPalette.map((hex: string, i: number) => (
                             <div
                               key={i}
                               className={styles.layerSwatch}
@@ -320,7 +321,6 @@ const Profile: React.FC<ProfileProps> = ({
                 </section>
               )}
 
-              {/* === ГАРДЕРОБ === */}
               <section>
                 <div className={styles.sectionHeader}>
                   <span className={styles.sectionTitle}>— гардероб —</span>

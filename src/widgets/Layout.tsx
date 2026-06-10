@@ -7,7 +7,7 @@ import { type AuthUser } from './auth/AuthModal'
 interface LayoutProps {
   children: React.ReactNode
   user: AuthUser | null
-  onNavigate: (to: 'home' | 'test' | 'profile' | 'wardrobe') => void
+  onNavigate: (to: 'home' | 'test' | 'profile' | 'wardrobe' | 'articles' | 'article') => void
   onAuthSuccess: (payload: { user: AuthUser; mode: 'login' | 'register' }) => void
 }
 

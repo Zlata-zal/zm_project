@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import AuthModal, { type AuthUser } from '../auth/AuthModal'
 import styles from './Header.module.scss'
 
+
 interface HeaderProps {
   user: AuthUser | null
-  onNavigate: (to: 'home' | 'test' | 'profile' | 'wardrobe') => void
+  onNavigate: (to: 'home' | 'test' | 'profile' | 'wardrobe' | 'articles' | 'article') => void
   onAuthSuccess: (payload: { user: AuthUser; mode: 'login' | 'register' }) => void
 }
-
 const Header: React.FC<HeaderProps> = ({ user, onNavigate, onAuthSuccess }) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
@@ -15,13 +15,13 @@ const Header: React.FC<HeaderProps> = ({ user, onNavigate, onAuthSuccess }) => {
     <>
       <header className={styles.appHeader}>
         <div className={styles.headerLeft}>
-          <span className={styles.logoMark}>ZM</span>
+          <span className={styles.logoMark}>ЗМ</span>
         </div>
         <nav className={styles.headerNav}>
           <button className={styles.navButton} onClick={() => onNavigate('home')}>
             Главная
           </button>
-          <button className={styles.navButton} onClick={() => onNavigate('test')}>
+          <button className={styles.navButton} onClick={() => onNavigate('articles')}>
             Статьи
           </button>
           <button

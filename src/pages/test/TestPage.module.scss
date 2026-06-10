@@ -1,6 +1,6 @@
 @use '../../assets/styles/variables' as *;
 
-// Локальная палитра (как в Profile)
+
 $grey-bg: #eeece6;
 $grey-bg-light: #f5f1e8;
 $grey-text-primary: #383d41;
@@ -18,7 +18,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   margin: 0 auto;
 }
 
-// === ПРОГРЕСС-ПОЛОСКА СВЕРХУ ===
+
 .progressBar {
   position: absolute;
   top: 32px;
@@ -36,7 +36,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   box-shadow: 0 0 8px rgba($color-primary, 0.3);
 }
 
-// === EDGE-INFO ===
+
 .edgeInfo {
   position: absolute;
   top: 12px;
@@ -59,7 +59,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   }
 }
 
-// === ОБЩАЯ СЕТКА ===
+
 .layout {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -68,7 +68,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   margin-top: 24px;
 }
 
-// === ЛЕВАЯ КОЛОНКА ===
+
 .left {
   position: sticky;
   top: 60px;
@@ -127,7 +127,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   margin: 0;
 }
 
-// === ПРАВАЯ КОЛОНКА ===
+
 .right {
   display: flex;
   flex-direction: column;
@@ -216,7 +216,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   transition: all 0.2s ease;
 }
 
-// === НАВИГАЦИЯ ===
+
 .nav {
   margin-top: 32px;
   padding-top: 22px;
@@ -287,7 +287,7 @@ $grey-border: rgba(56, 61, 65, 0.15);
   }
 }
 
-// === АДАПТИВ ===
+
 @media (max-width: 900px) {
   .testPage {
     padding: 60px 24px 32px;
@@ -340,16 +340,83 @@ $grey-border: rgba(56, 61, 65, 0.15);
   }
 }
 
-@media (max-width: 480px) {
-  .edgeInfo {
-    font-size: 8px;
-    letter-spacing: 0.2em;
 
-    span:nth-child(2) {
-      display: none;
+@media (max-width: 900px) {
+  .testPage {
+    padding: 60px 24px 32px;
+  }
+
+  .progressBar,
+  .edgeInfo {
+    left: 24px;
+    right: 24px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .left {
+    position: static;
+    padding-right: 0;
+    border-right: none;
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid rgba($grey-text-primary, 0.18);
+  }
+
+  .stepNum {
+    font-size: 80px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .option {
+    padding: 14px 18px;
+    gap: 12px;
+
+   
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.95);
+      transform: scale(0.98);
     }
   }
 
+  .optionLetter {
+    min-width: 36px;
+    font-size: 12px;
+  }
+
+  .nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .navProgress {
+    display: none;  // на мобильных скрываем — место занимает прогресс-бар сверху
+  }
+
+  .navBack {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .navNext {
+    padding: 12px 16px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
   .testPage {
     padding: 50px 16px 24px;
   }
@@ -360,19 +427,67 @@ $grey-border: rgba(56, 61, 65, 0.15);
     right: 16px;
   }
 
+  .edgeInfo {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+
+    span:nth-child(2) {
+      display: none;
+    }
+  }
+
   .stepNum {
-    font-size: 64px;
+    font-size: 56px;
+    margin-bottom: 8px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    gap: 8px;
+
+    &::before {
+      width: 20px;
+    }
   }
 
   .title {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 12px;
   }
 
   .option {
-    padding: 12px 14px;
+    padding: 14px 14px;
+    gap: 10px;
+  }
+
+  .optionLetter {
+    min-width: 28px;
+    font-size: 11px;
   }
 
   .optionText {
     font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .nav {
+    margin-top: 24px;
+    padding-top: 18px;
+  }
+
+  .navBack {
+    font-size: 10px;
+  }
+
+  .navNext {
+    padding: 11px 12px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
   }
 }

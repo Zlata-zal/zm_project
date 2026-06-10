@@ -39,6 +39,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   font-size: 0.9rem;
+  color: $color-surface-light-start;
 }
 
 .headerNav {
@@ -82,17 +83,57 @@
   }
 }
 
+// === МОБИЛЬНЫЕ ===
 @media (max-width: 768px) {
   .appHeader {
-    padding: 0.9rem 1rem;
+    padding: 0.8rem 1rem;
+    flex-wrap: nowrap;             // строго в одну линию
+    gap: 0.5rem;
+  }
+
+  .logoMark {
+    width: 38px;
+    height: 38px;
+    font-size: 0.8rem;
+    flex-shrink: 0;                // не сжимать лого
   }
 
   .headerNav {
-    gap: 0.4rem;
+    gap: 0.3rem;
+    flex-shrink: 1;                // навигация может сжиматься
+    min-width: 0;                  // важно для flex
   }
 
   .navButton {
-    padding: 0.35rem 0.8rem;
-    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.78rem;
+    white-space: nowrap;           // текст кнопки не переносится
+  }
+}
+
+
+@media (max-width: 480px) {
+  .appHeader {
+    padding: 0.7rem 0.75rem;
+  }
+
+  .logoMark {
+    width: 34px;
+    height: 34px;
+    font-size: 0.75rem;
+  }
+
+  .headerNav {
+    gap: 0.2rem;
+  }
+
+  .navButton {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.72rem;
+  }
+
+  // Primary-кнопка чуть выделяется размером
+  .navPrimary {
+    padding: 0.35rem 0.7rem;
   }
 }

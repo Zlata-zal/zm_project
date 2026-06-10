@@ -15,7 +15,7 @@ $grey-text-tertiary: #8e979e;
 .profile {
   background: $grey-bg;
   min-height: 100vh;
-  font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+  font-family: 'Zerno' serif;
 }
 
 
@@ -51,7 +51,7 @@ $grey-text-tertiary: #8e979e;
   position: absolute;
   bottom: -40px;
   left: 8px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 280px;
   color: rgba($color-primary, 0.06);
@@ -69,7 +69,7 @@ $grey-text-tertiary: #8e979e;
   display: flex;
   justify-content: space-between;
   color: rgba($grey-text-primary, 0.55);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 10px;
   letter-spacing: 0.3em;
@@ -96,7 +96,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .heroEyebrow {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 10px;
   color: $color-primary;
@@ -116,7 +116,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .heroName {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: clamp(2.5rem, 5vw, 60px);
   color: $grey-text-primary;
@@ -138,7 +138,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .heroTypeName {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-size: 18px;
   color: $color-primary;
   font-style: italic;
@@ -157,7 +157,7 @@ $grey-text-tertiary: #8e979e;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   font-style: italic;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
 }
 
 .heroCtaBlock {
@@ -172,7 +172,7 @@ $grey-text-tertiary: #8e979e;
   background: $color-primary;
   color: $white-blue;
   border: none;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 11px;
   letter-spacing: 0.2em;
@@ -194,7 +194,7 @@ $grey-text-tertiary: #8e979e;
   text-transform: uppercase;
   color: rgba($grey-text-primary, 0.5);
   font-style: italic;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
 }
 
 // === TIMELINE ===
@@ -212,7 +212,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .timelineLabel {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 10px;
   color: $grey-text-secondary;
@@ -221,7 +221,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .timelineProgress {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-size: 11px;
   color: $grey-text-secondary;
   font-style: italic;
@@ -250,7 +250,7 @@ $grey-text-tertiary: #8e979e;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 10px;
   color: $grey-text-tertiary;
@@ -312,7 +312,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .metaCellNum {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 9px;
   color: $color-primary;
@@ -320,7 +320,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .metaCellVal {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-size: 26px;
   color: $grey-text-primary;
   font-weight: 500;
@@ -339,14 +339,14 @@ $grey-text-tertiary: #8e979e;
   text-transform: uppercase;
   color: $grey-text-secondary;
   font-style: italic;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
 }
 
 .metaCellTrend {
   position: absolute;
   top: 22px;
   right: 24px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 11px;
   color: $color-primary;
@@ -374,7 +374,7 @@ $grey-text-tertiary: #8e979e;
   text-transform: uppercase;
   color: $grey-text-tertiary;
   font-style: italic;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   padding: 8px 0 6px;
   border-top: 0.5px solid rgba($grey-text-primary, 0.1);
   margin-top: 8px;
@@ -457,7 +457,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .dividerSectionLabel {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 10px;
   color: $color-primary;
@@ -550,7 +550,7 @@ $grey-text-tertiary: #8e979e;
   text-transform: uppercase;
   color: $color-primary;
   font-style: italic;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
 }
 
 
@@ -633,7 +633,7 @@ $grey-text-tertiary: #8e979e;
   text-transform: uppercase;
   color: $color-primary;
   font-style: italic;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
 }
 
 .wardrobeTag {
@@ -642,7 +642,7 @@ $grey-text-tertiary: #8e979e;
   right: 6px;
   padding: 3px 7px;
   background: rgba(255, 255, 255, 0.85);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 8px;
   color: $color-primary;
@@ -696,7 +696,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .previewLockText {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 9px;
   color: $color-primary;
@@ -705,7 +705,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .previewCardNum {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-style: italic;
   font-size: 9px;
   color: $color-primary;
@@ -715,7 +715,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .previewCardTitle {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-size: 16px;
   color: $grey-text-primary;
   font-weight: 500;
@@ -839,7 +839,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .layersTitle {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno' serif;
   font-size: 18px;
   color: $grey-text-primary;
   margin: 0 0 16px;

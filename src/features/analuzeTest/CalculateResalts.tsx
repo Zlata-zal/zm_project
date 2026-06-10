@@ -132,7 +132,7 @@ function calculateColour(scores: TestTags) {
   // Определяем температуру
   const isWarm = warm > cool && warm > neutral
   const isCool = cool > warm && cool > neutral
-  const isNeutral = !isWarm && !isCool
+  //const _isNeutral = !isWarm && !isCool
 
   // Определяем светлоту
   const isLight = light > deep

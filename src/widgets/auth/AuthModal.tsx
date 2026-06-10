@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import styles from './AuthModal.module.scss'
+import { register, login } from '../../services/auth'
+import type { AuthUser } from '../../services/auth'
 
-export interface AuthUser {
-  email: string
-  name?: string
-  body?: BodyParams
-}
+export type { AuthUser }
 
 export interface BodyParams {
-  // твои поля
+  heightCm?: number
+  shouldersCm?: number
+  waistCm?: number
+  hipsCm?: number
+  shape?: string
 }
+
 
 interface AuthModalProps {
   isOpen: boolean
@@ -22,17 +25,28 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess }) => 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   if (!isOpen) return null
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    onSuccess({
-      user: { email, name },
-      mode,
-    })
-    onClose();
+  const handleSubmit = async () => {
+  setError(null)
+  setIsLoading(true)
+
+  try {
+    const user = mode === 'register'
+      ? await register(email, password, name)
+      : await login(email, password)
+
+    onSuccess({ user, mode })
+    onClose()
+  } catch (err: any) {
+    setError(err.message || 'Что-то пошло не так')
+  } finally {
+    setIsLoading(false)
   }
+}
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -115,9 +129,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess }) => 
             </div>
           )}
 
-          <button type="submit" className={styles.submitButton}>
-            {mode === 'login' ? 'войти →' : 'создать аккаунт →'}
-          </button>
+          {error && (
+            <p className={styles.errorMessage}>{error}</p>
+          )}
+
+      <button
+        type="button"
+        className={styles.submitButton}
+        onClick={handleSubmit}
+        disabled={isLoading || !email || !password}
+      >
+        {isLoading
+          ? 'Подождите...'
+          : (mode === 'register' ? 'Создать аккаунт' : 'Войти')}
+        </button>
         </form>
       </div>
     </div>

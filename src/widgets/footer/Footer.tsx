@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
       {/* Сетка с колонками */}
       <div className={styles.footerGrid}>
         <div className={styles.footerCol}>
-          <p className={styles.footerLogo}>ZM</p>
+          <p className={styles.footerLogo}>ЗМ</p>
           <p className={styles.footerTagline}>
             платформа о стиле, типажах и осознанном гардеробе
           </p>
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
           <p className={styles.footerColTitle}>контакты</p>
           <ul className={styles.footerList}>
             <li><a href="#" className={styles.footerLink}>telegram</a></li>
-            <li><a href="#" className={styles.footerLink}>instagram</a></li>
+            <li><a href="#" className={styles.footerLink}>вк</a></li>
             <li><a href="#" className={styles.footerLink}>email</a></li>
             <li><a href="#" className={styles.footerLink}>сотрудничество</a></li>
           </ul>

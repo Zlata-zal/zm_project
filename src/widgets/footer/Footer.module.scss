@@ -34,7 +34,7 @@
 }
 
 .footerEyebrow {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 12px;
   letter-spacing: 0.2em;
@@ -43,7 +43,7 @@
 }
 
 .footerTitle {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-size: clamp(2rem, 4vw, 3rem); // ← было clamp(2.5rem, 5vw, 4rem) — стало компактнее
   line-height: 1.1;
   margin: 0;
@@ -73,7 +73,7 @@
 }
 
 .footerLogo {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-size: 28px;                   // ← было 32px
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -82,7 +82,7 @@
 }
 
 .footerTagline {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 13px;                   // ← было 14px
   opacity: 0.75;                     // ← немного приглушила

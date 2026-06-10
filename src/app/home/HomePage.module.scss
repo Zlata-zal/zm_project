@@ -8,10 +8,9 @@
 
 .kibbeStage {
   background: transparent;
-  padding: 5rem 0 4rem;          // ← убрала горизонтальный padding (было 1rem)
+  padding: 5rem 0 4rem;
   margin: 4rem 0;
   position: relative;
-
 
   &::before {
     content: 'six types';
@@ -30,82 +29,41 @@
 
 .kibbeRow {
   display: flex;
-  gap: 0;
+  gap: 16px;
   justify-content: center;
-  align-items: stretch;
-  padding-top: 80px;
-  width: 100%;                   // ← на всю ширину
-  max-width: 100%;               // ← без ограничения
+  align-items: flex-end;
+  padding: 80px 1rem 0;
+  width: 100%;
   margin: 0 auto;
-  padding-left: 0.5rem;          // ← минимальные отступы от краёв
-  padding-right: 0.5rem;
+  flex-wrap: nowrap;
 
-  // Затемнение соседей при наведении на конкретный портрет
   &:has(.kibbePerson:hover) .kibbePerson:not(:hover) {
     opacity: 0.4;
     filter: grayscale(0.7);
   }
-
-  .kibbePerson:hover {
-    opacity: 1;
-    filter: none;
-    transform: translateY(-12px);
-    z-index: 2;
-
-    .kibbeCallout {
-      opacity: 1;
-    }
-
-    .kibbePortrait {
-      border-bottom-color: $color-primary;
-      border-bottom-width: 2px;
-      background: linear-gradient(180deg, transparent 0%, rgba($color-primary, 0.08) 100%);
-    }
-
-    .kibbeCaption {
-      color: $color-primary;
-    }
-
-    &::before {
-      color: $color-primary;
-      transform: translateX(-50%) scale(1.1);
-    }
-  }
-
-  // Сдвиг последнего портрета вниз
-  .kibbePerson:nth-child(6) {
-    --offset-y: 20px;
-    transform: translateY(var(--offset-y));
-
-    &:hover {
-      transform: translateY(calc(var(--offset-y) - 12px));
-    }
-  }
 }
 
 .kibbePerson {
-  flex: 1 1 0;                   // ← растягиваются на всё доступное пространство
+  flex: 1 1 0;
   min-width: 0;
-  max-width: none;               // ← без ограничения сверху
   cursor: pointer;
   position: relative;
-  padding: 36px 24px 20px;       // ← вторая цифра 24px = большой шаг между фото
+  padding: 36px 0 20px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
   transition:
     opacity 0.4s ease,
     filter 0.4s ease,
     transform 0.4s ease;
 
-  // Маленькая римская цифра над портретом
   &::before {
     content: '';
     position: absolute;
     top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Zerno', serif;
     font-size: 16px;
     font-style: italic;
     color: $color-text-secondary;
@@ -119,43 +77,65 @@
   &:nth-child(4)::before { content: 'iv'; }
   &:nth-child(5)::before { content: 'v'; }
   &:nth-child(6)::before { content: 'vi'; }
+
+  &:hover {
+    transform: translateY(-12px);
+    z-index: 2;
+
+    .kibbeCallout { opacity: 1; }
+
+    .kibbePortrait {
+      border-bottom-color: $color-primary;
+      border-bottom-width: 2px;
+    }
+
+    .kibbeCaption { color: $color-primary; }
+
+    &::before {
+      color: $color-primary;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .kibbeCaption::before,
+    .kibbeCaption::after {
+      color: $color-primary;
+    }
+  }
 }
 
 .kibbePortrait {
-  width: 160%;                   // ← ВЕРНУЛА 100% (было 120% — ломало вёрстку)
-  aspect-ratio: 3 / 4;
+  width: 100%;
+  height: 280px;               
   overflow: hidden;
   background: linear-gradient(180deg, transparent 0%, rgba($color-primary, 0.04) 100%);
   border-bottom: 1px solid rgba($color-primary, 0.25);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  position: relative;
   transition:
     background 0.4s ease,
     border-bottom-color 0.4s ease,
     border-bottom-width 0.4s ease;
 
   img {
-    width: 100%;                 // ← ВЕРНУЛА 100% (было 120%)
-    height: 100%;                // ← ВЕРНУЛА 100% (было 120%)
-    object-fit: contain;
-    object-position: bottom center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           
+    object-position: center top; 
     display: block;
   }
 }
 
 .kibbeCaption {
   margin-top: 14px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-size: 18px;
   font-style: italic;
   font-weight: 500;
   color: $color-text-primary;
   text-align: center;
   text-transform: capitalize;
-  letter-spacing: 0;
   transition: color 0.4s ease;
   line-height: 1.1;
+  white-space: nowrap;
 
   &::before,
   &::after {
@@ -170,11 +150,6 @@
   }
 }
 
-.kibbePerson:hover .kibbeCaption::before,
-.kibbePerson:hover .kibbeCaption::after {
-  color: $color-primary;
-}
-
 .kibbeCallout {
   position: absolute;
   top: -36px;
@@ -184,14 +159,12 @@
   color: $white-blue;
   padding: 8px 16px;
   border-radius: 24px;
-  font-family: $default-font;
+  font-family: 'Zerno';
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   white-space: nowrap;
-  text-align: center;
-  line-height: 1.3;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease 0.05s;
@@ -211,23 +184,41 @@
 }
 
 @media (max-width: 1024px) {
-  .kibbePerson {
-    padding: 36px 12px 20px;     // ← на планшете шаг поменьше
-  }
-
-  .kibbeCaption {
-    font-size: 16px;
-
-    &::before,
-    &::after {
-      margin: 0 5px;
-    }
-  }
+  .kibbePortrait { height: 220px; }
+  .kibbeCaption { font-size: 16px; }
 }
 
 @media (max-width: 640px) {
+  .kibbeRow {
+    gap: 8px;
+    padding: 60px 0.5rem 0;
+  }
+
+  .kibbePortrait { height: 160px; }
+
+  .kibbeCaption {
+    font-size: 13px;
+    &::before, &::after { display: none; }
+  }
+
+  .kibbeCallout {
+    font-family: 'Zerno', serif;
+    font-size: 10px;
+    padding: 6px 12px;
+    top: -30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .kibbePortrait { height: 220px; }
+  .kibbeCaption { font-size: 16px; }
+}
+
+
+@media (max-width: 768px) {
   .kibbeStage {
-    padding: 4rem 0 2rem;
+    padding: 3rem 0 2rem;
+    margin: 2rem 0;
 
     &::before {
       top: 2rem;
@@ -235,33 +226,85 @@
     }
   }
 
+  
   .kibbeRow {
-    padding-top: 60px;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
+    gap: 12px;
+    padding: 60px 1rem 16px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar { display: none; }
+
+   
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+
+    
+    &:has(.kibbePerson:hover) .kibbePerson:not(:hover) {
+      opacity: 1;
+      filter: none;
+    }
   }
 
   .kibbePerson {
-    padding: 30px 4px 16px;       // ← на мобильных минимальный шаг
+    flex: 0 0 140px;        
+    scroll-snap-align: start;
+    padding: 28px 0 12px;
+
+    
+    &:hover {
+      transform: none;
+    }
+
+    
+    .kibbeCallout {
+      opacity: 0;            
+    }
+  }
+
+  .kibbePortrait { height: 190px; }
+
+  .kibbeCaption {
+    font-size: 14px;
+    margin-top: 10px;
+
+    &::before, &::after {
+      margin: 0 4px;
+      font-size: 10px;
+    }
+  }
+}
+
+
+@media (max-width: 480px) {
+  .kibbeStage {
+    padding: 2.5rem 0 1.5rem;
+  }
+
+  .kibbeRow {
+    gap: 10px;
+    padding: 50px 0.75rem 12px;
+  }
+
+  .kibbePerson {
+    flex: 0 0 120px;
+    padding: 24px 0 10px;
 
     &::before {
       font-size: 13px;
-      top: 4px;
+      top: 6px;
     }
   }
+
+  .kibbePortrait { height: 160px; }
 
   .kibbeCaption {
-    font-size: 13px;
+    font-size: 12px;
+    margin-top: 8px;
 
-    &::before,
-    &::after {
-      display: none;
-    }
-  }
-
-  .kibbeCallout {
-    font-size: 10px;
-    padding: 6px 12px;
-    top: -30px;
+    &::before, &::after { display: none; }
   }
 }

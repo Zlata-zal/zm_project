@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import Layout from '../widgets/Layout'
 import TestPage from '../pages/test/TestPage'
@@ -6,20 +7,33 @@ import WardrobePage from '../pages/wardrobe/WardrobePage'
 import { type AuthUser } from '../widgets/auth/AuthModal'
 import type { KibbeResult } from '../pages/test/types'
 import HomePage from './home/HomePage'
+import ArticlesPage from '../pages/article/ArticlesPage'
+import ArticlePage from '../pages/article/ArticlePage'
+import { fullArticles } from '../pages/article/ArticleData'
+import { getCurrentUser, logout, saveTestResult } from '../services/auth'
+
+
+type ActiveView = 'home' | 'test' | 'profile' | 'wardrobe' | 'articles' | 'article'
 
 const App: React.FC = () => {
   const [isTestOpen, setIsTestOpen] = useState(false)
-  const [activeView, setActiveView] = useState<'home' | 'test' | 'profile' | 'wardrobe'>('home')
+  const [activeView, setActiveView] = useState<ActiveView>('home')
   const [user, setUser] = useState<AuthUser | null>(null)
+  const [currentArticleId, setCurrentArticleId] = useState<string | null>(null)
 
   useEffect(() => {
+  const loadUser = async () => {
     try {
-      const raw = localStorage.getItem('zm_user')
-      if (raw) setUser(JSON.parse(raw) as AuthUser)
-    } catch {
-      // ignore
+      const currentUser = await getCurrentUser()
+      if (currentUser) {
+        setUser(currentUser)
+      }
+    } catch (err) {
+      console.error('Не удалось загрузить пользователя:', err)
     }
-  }, [])
+  }
+  loadUser()
+}, [])
 
   const handleAuthSuccess = ({
     user: nextUser,
@@ -38,38 +52,37 @@ const App: React.FC = () => {
     setIsTestOpen(false)
   }
 
- 
-  const handleTestFinish = (result: KibbeResult) => {
-    console.log('App: получен результат теста', result)
+  const handleTestFinish = async (result: KibbeResult) => {
+  console.log('App: получен результат теста', result)
 
-    // Если пользователь не авторизован — сохраним результат во временное хранилище
-    if (!user) {
-      try {
-        localStorage.setItem('zm_pending_result', JSON.stringify(result))
-      } catch { /* ignore */ }
-      
-      setActiveView('home')
-      setIsTestOpen(false)
-      return
-    }
-
-    // Сохраняем результат в user
-    const updated: AuthUser = { ...user, kibbeResult: result }
-    setUser(updated)
+  if (!user) {
     try {
-      localStorage.setItem('zm_user', JSON.stringify(updated))
+      localStorage.setItem('zm_pending_result', JSON.stringify(result))
     } catch { /* ignore */ }
 
-    // Переходим в профиль
-    setActiveView('profile')
+    setActiveView('home')
     setIsTestOpen(false)
+    return
   }
 
-  const navigate = (to: 'home' | 'test' | 'profile' | 'wardrobe') => {
+  try {
+    const updated = await saveTestResult(result)
+    setUser(updated)
+  } catch (err) {
+    console.error('Не удалось сохранить результат:', err)
+  }
+
+  setActiveView('profile')
+  setIsTestOpen(false)
+}
+
+
+  const navigate = (to: ActiveView) => {
     setActiveView(to)
     setIsTestOpen(to === 'test')
   }
- // === ТЕСТ ===
+
+
   if (activeView === 'test' || isTestOpen) {
     return (
       <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
@@ -78,13 +91,70 @@ const App: React.FC = () => {
             setIsTestOpen(false)
             setActiveView('home')
           }}
-          onFinish={handleTestFinish}     
+          onFinish={handleTestFinish}
         />
       </Layout>
     )
   }
 
-  
+
+  if (activeView === 'articles') {
+    return (
+      <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
+        <ArticlesPage
+          user={user}
+          onOpenArticle={(id) => {
+            setCurrentArticleId(id)
+            setActiveView('article')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      </Layout>
+    )
+  }
+
+
+  if (activeView === 'article') {
+    const article = currentArticleId
+      ? fullArticles.find(a => a.id === currentArticleId)
+      : undefined
+
+    // Если статьи нет — показываем ленту
+    if (!article) {
+      return (
+        <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
+          <ArticlesPage
+            user={user}
+            onOpenArticle={(id) => {
+              setCurrentArticleId(id)
+              setActiveView('article')
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          />
+        </Layout>
+      )
+    }
+
+    const relatedArticles = fullArticles
+      .filter(a => a.id !== article.id && a.category === article.category)
+      .slice(0, 3)
+
+    return (
+      <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
+        <ArticlePage
+          article={article}
+          related={relatedArticles}
+          onBack={() => setActiveView('articles')}
+          onOpenArticle={(id) => {
+            setCurrentArticleId(id)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      </Layout>
+    )
+  }
+
+
   if (activeView === 'profile') {
     return (
       <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
@@ -92,10 +162,8 @@ const App: React.FC = () => {
           <Profile
             user={user}
             onLogout={() => {
+              logout()                                  // ← добавили
               setUser(null)
-              try {
-                localStorage.removeItem('zm_user')
-              } catch { /* ignore */ }
               setActiveView('home')
             }}
             onOpenWardrobe={() => setActiveView('wardrobe')}
@@ -109,14 +177,13 @@ const App: React.FC = () => {
             onBack={() => {
               setActiveView('home')
             }}
-            onFinish={handleTestFinish}    
+            onFinish={handleTestFinish}
           />
         )}
       </Layout>
     )
   }
 
-  
   if (activeView === 'wardrobe') {
     return (
       <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
@@ -132,7 +199,6 @@ const App: React.FC = () => {
     )
   }
 
-  
   return (
     <Layout user={user} onNavigate={navigate} onAuthSuccess={handleAuthSuccess}>
       <HomePage onStartTest={() => setIsTestOpen(true)} />

@@ -1,6 +1,6 @@
 @use '../../assets/styles/variables' as *;
 
-// Локальная палитра модалки
+
 $grey-bg: #eeece6;
 $grey-bg-light: #f5f1e8;
 $grey-text-primary: #383d41;
@@ -94,7 +94,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .logo {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', Georgia, serif;
   font-size: 26px;
   font-weight: 600;
   color: $color-primary;
@@ -104,7 +104,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .logoMeta {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', Georgia, serif;
   font-style: italic;
   font-size: 9px;
   color: $grey-text-tertiary;
@@ -113,7 +113,7 @@ $grey-text-tertiary: #8e979e;
   margin: 0;
 }
 
-// === ПЕРЕКЛЮЧАТЕЛЬ ВХОД / РЕГИСТРАЦИЯ ===
+
 .tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -143,7 +143,7 @@ $grey-text-tertiary: #8e979e;
 
 .tab {
   padding: 9px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 11px;
   letter-spacing: 0.2em;
@@ -163,7 +163,7 @@ $grey-text-tertiary: #8e979e;
   }
 }
 
-// === ФОРМА ===
+
 .form {
   display: flex;
   flex-direction: column;
@@ -178,7 +178,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .label {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 10px;
   color: $color-primary;
@@ -186,21 +186,21 @@ $grey-text-tertiary: #8e979e;
   text-transform: uppercase;
 }
 
-// === ВХОДНЫЕ ПОЛЯ — СВЕТЛЫЕ ===
+
 .input {
   padding: 11px 14px;
   border: 0.5px solid rgba($color-primary, 0.15);
-  background: rgba(255, 255, 255, 0.85);  // ← светлый фон полей
+  background: rgba(255, 255, 255, 0.85);  
   border-radius: 8px;
   color: $grey-text-primary;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Zerno', sans-serif;
   transition: all 0.2s ease;
 
   &::placeholder {
     color: rgba($color-primary, 0.3);
     font-style: italic;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Zerno', serif;
   }
 
   &:hover {
@@ -224,7 +224,7 @@ $grey-text-tertiary: #8e979e;
 }
 
 .forgotLink {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 10px;
   color: $color-secondary;
@@ -235,7 +235,7 @@ $grey-text-tertiary: #8e979e;
   background: none;
   border: none;
   padding: 0;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
 
   &:hover {
     color: $color-primary;
@@ -243,7 +243,7 @@ $grey-text-tertiary: #8e979e;
   }
 }
 
-// === КНОПКА SUBMIT ===
+
 .submitButton {
   margin-top: 6px;
   padding: 13px;
@@ -251,7 +251,7 @@ $grey-text-tertiary: #8e979e;
   color: $white-blue;
   border: none;
   border-radius: 8px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 12px;
   letter-spacing: 0.2em;
@@ -272,11 +272,11 @@ $grey-text-tertiary: #8e979e;
   }
 }
 
-// === SWITCH (опциональный, если оставишь) ===
+
 .switch {
   margin-top: 18px;
   text-align: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Zerno', serif;
   font-style: italic;
   font-size: 11px;
   color: $grey-text-secondary;
@@ -293,7 +293,7 @@ $grey-text-tertiary: #8e979e;
   font-weight: 600;
   cursor: pointer;
   font-size: inherit;
-  font-family: inherit;
+  font-family: 'Zerno', serif;
   padding: 0;
   text-decoration: underline;
   transition: color 0.2s ease;
@@ -303,7 +303,7 @@ $grey-text-tertiary: #8e979e;
   }
 }
 
-// === АДАПТИВ ===
+
 @media (max-width: 480px) {
   .modal {
     padding: 30px 24px 26px;
@@ -317,4 +317,15 @@ $grey-text-tertiary: #8e979e;
   .tab {
     font-size: 10px;
   }
+}
+.errorMessage {
+  padding: 10px 14px;
+  background: rgba(150, 49, 50, 0.08);
+  border-left: 2px solid #963132;
+  border-radius: 4px;
+  font-family: 'Zerno', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #963132;
+  margin: 12px 0;
 }

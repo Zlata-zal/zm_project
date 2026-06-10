@@ -59,12 +59,12 @@ type StyleCard =
     }
 
 const kibbeTypes = [
-  { id: 'dramatic',      caption: 'драматик',      callout: 'драматик',      image: drama },
-  { id: 'natural',       caption: 'натурал',       callout: 'натурал',       image: natura },
-  { id: 'classic',       caption: 'классик',       callout: 'классик',       image: classic },
-  { id: 'romantic',      caption: 'романтик',      callout: 'романтик',      image: romance },
-  { id: 'gamine',        caption: 'гамин',         callout: 'гамин',         image: gamin },
-  { id: 'softDramatic',  caption: 'софт драматик', callout: 'софт драматик', image: softdrama },
+  { id: 'dramatic',      caption: 'драматик',      callout: 'высокая мода, подиум, графичный минимализм',      image: drama },
+  { id: 'natural',       caption: 'натурал',       callout: 'бохо, эко, тёплая земля и солнечный лён',       image: natura },
+  { id: 'classic',       caption: 'классик',       callout: 'old money, тихая роскошь, парижская сдержанность',       image: classic },
+  { id: 'romantic',      caption: 'романтик',      callout: 'женственность, бархат, кружево, мягкий свет',      image: romance },
+  { id: 'gamine',        caption: 'гамин',         callout: 'парижская улица, твид, винтаж 60-х',         image: gamin },
+  { id: 'softDramatic',  caption: 'софт драматик', callout: 'голливудский глэм, красная дорожка, атлас', image: softdrama },
 ]
 
 const styleCards: StyleCard[] = [
@@ -299,7 +299,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
 
       <section className={styles.hero}>
         <aside className={styles.heroSideText}>
-            — style code · vol 01 · 2026 —
+           — первое издание · 2026 —
           </aside>
         <div className={styles.heroContent}>
           <p className={styles.mainLogo}>ZM</p>
@@ -313,7 +313,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
             {/* <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={onStartTest}>
               Take the test
             </button> */}
-            <button className={`${styles.btn} ${styles.btnSecondary}`}>Learn more</button>
+            {/* <button className={`${styles.btn} ${styles.btnSecondary}`}>Learn more</button> */}
           </div>
         </div>
       </section>
@@ -337,7 +337,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStartTest }) => {
             .map(({ img, i }) => {
             const distance = i - center
             const abs = Math.abs(distance)
-            const gap = 110 
+            const gap = 120 
            const offset = distance > 0
             ? distance * 110 + gap
             : distance * 110 - gap
